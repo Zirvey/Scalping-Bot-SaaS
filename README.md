@@ -1,62 +1,62 @@
 # EV Scalp Pro — SaaS Presentation
 
-**Продажа готового торгового бота для Polymarket 5m рынков (BTC / ETH / SOL Up/Down).**
+**Turnkey trading bot for Polymarket 5m markets (BTC / ETH / SOL Up/Down).**
 
-🌐 **Live demo:** [открыть интерактивную панель](demo/)
+🌐 **Live demo:** [open interactive dashboard](demo/)
 
-## Быстрый старт
+## Quick start
 
-Локально:
+Locally:
 
 ```bash
 open index.html
-# или
+# or
 python3 -m http.server 8080
 # → http://127.0.0.1:8080
 ```
 
-**GitHub Pages:** лендинг на `/`, демо панели на `/demo/`
+**GitHub Pages:** landing page at `/`, demo dashboard at `/demo/`
 
-## Ключевые цифры (проверено по журналу)
+## Key metrics (verified from trade journal)
 
-| Метрика | Значение |
-|---------|----------|
-| **Общий PnL** | **+$75.44** |
+| Metric | Value |
+|--------|-------|
+| **Total PnL** | **+$75.44** |
 | **Win Rate** | **67.8%** |
-| **Сделок** | 432 |
-| **Лучший exit** | take_profit +$195 (234 сделки) |
-| **Активы** | BTC +$29.60 · ETH +$22.06 · SOL +$23.78 |
+| **Trades** | 432 |
+| **Best exit** | take_profit +$195 (234 trades) |
+| **Assets** | BTC +$29.60 · ETH +$22.06 · SOL +$23.78 |
 
-## Структура
+## Structure
 
 ```
-├── index.html              # Лендинг / sales deck
-├── demo/index.html         # Интерактивное демо веб-панели
+├── index.html              # Landing page / sales deck
+├── demo/index.html         # Interactive web dashboard demo
 ├── assets/
-│   ├── css/                # Стили лендинга и демо
-│   ├── js/demo.js          # Симуляция бота
-│   └── screenshots/        # UI-превью + реальные графики
+│   ├── css/                # Landing and demo styles
+│   ├── js/demo.js          # Bot simulation
+│   └── screenshots/        # UI previews + real charts
 ├── docs/
 │   ├── HOW_IT_WORKS.md
 │   └── PERFORMANCE.md
 └── scripts/generate_charts.py
 ```
 
-## Демо
+## Demo
 
-Интерактивная панель повторяет UI оригинального бота:
-- **Дашборд** — баланс, PnL, открытые позиции, воронка сигналов
-- **Backtest** — exit-sim результаты на 432 сделках
-- **Консоль** — live-логи (симуляция)
-- **Настройки** — параметры стратегии
-- **Сделки** — история
+The interactive dashboard mirrors the original bot UI:
+- **Dashboard** — balance, PnL, open positions, signal funnel
+- **Backtest** — exit-sim results on 432 trades
+- **Console** — live logs (simulated)
+- **Settings** — strategy parameters
+- **Trades** — trade history
 
-Данные тестовые, реальная торговля не выполняется.
+Data is simulated; no real trading is performed.
 
-## Контакт
+## Contact
 
-_Укажите ваш email / Telegram для демо и передачи репозитория._
+_Add your email / Telegram for a demo and repository handoff._
 
 ---
 
-*Disclaimer: прошлые результаты не гарантируют будущую прибыль. Не финансовый совет.*
+*Disclaimer: past performance does not guarantee future profits. Not financial advice.*
