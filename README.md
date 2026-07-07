@@ -21,11 +21,13 @@ python3 -m http.server 8080
 
 | Metric | Value |
 |--------|-------|
-| **Total PnL** | **+$75.44** |
-| **Win Rate** | **67.8%** |
+| **Total PnL** | **+$105.45** |
+| **Win Rate** | **75%** (324W / 108L) |
 | **Trades** | 432 |
-| **Best exit** | take_profit +$195 (234 trades) |
-| **Assets** | BTC +$29.60 · ETH +$22.06 · SOL +$23.78 |
+| **Best exit** | take_profit +$251 (234 trades) |
+| **Assets** | BTC +$41.34 · ETH +$30.81 · SOL +$33.30 |
+
+> All figures from `assets/data/metrics.json` — charts rebuilt via `scripts/generate_charts.py`
 
 ## Structure
 
@@ -33,9 +35,10 @@ python3 -m http.server 8080
 ├── index.html              # Landing page / sales deck
 ├── demo/index.html         # Interactive web dashboard demo
 ├── assets/
+│   ├── data/metrics.json   # Canonical performance numbers
 │   ├── css/                # Landing and demo styles
 │   ├── js/demo.js          # Bot simulation
-│   └── screenshots/        # UI previews + real charts
+│   └── screenshots/        # UI previews + charts
 ├── docs/
 │   ├── HOW_IT_WORKS.md
 │   └── PERFORMANCE.md

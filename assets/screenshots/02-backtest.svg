@@ -2,33 +2,33 @@
   <rect width="100%" height="100%" fill="#0d1117"/>
   <rect width="960" height="44" fill="#161b22"/>
   <text x="20" y="28" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="700">Polymarket Bot</text>
-  <text x="140" y="27" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">0H1>@4</text>
+  <text x="140" y="27" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">Dashboard</text>
   <rect x="212" y="12" width="72" height="22" rx="6" fill="#1f2630"/>
   <text x="224" y="27" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Backtest</text>
   <rect x="20" y="58" width="920" height="80" rx="10" fill="#161b22" stroke="#2d333b"/>
-  <text x="32" y="82" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Exit-sim 1M:B5AB</text>
-  <text x="32" y="104" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">432 8AB>@8G5A:8E 2E>40 · A@02=5=85 exit policy</text>
-  <text x="32" y="126" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">5@48:B: +$6.33 C;CGH5=85 ?@8 DD cut 0.26</text>
+  <text x="32" y="82" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Exit-sim backtest</text>
+  <text x="32" y="104" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">432 historical entries · exit policy comparison</text>
+  <text x="32" y="126" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">Verdict: +$8.85 improvement at DD cut 0.26</text>
   <rect x="20" y="154" width="450" height="120" rx="10" fill="#161b22" stroke="#2d333b"/>
-  <text x="32" y="178" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">EV-359B</text>
+  <text x="32" y="178" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">EV gate</text>
   <text x="32" y="210" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="28" font-weight="700">432</text>
-  <text x="32" y="228" fill="#8b949e" font-family="system-ui,sans-serif" font-size="11">?@>H;8 D8;LB@K 87 1,247</text>
+  <text x="32" y="228" fill="#8b949e" font-family="system-ui,sans-serif" font-size="11">passed filters of 1,247</text>
   <rect x="490" y="154" width="450" height="120" rx="10" fill="#161b22" stroke="#2d333b"/>
-  <text x="502" y="178" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">PnL ?> 0:B820<</text>
+  <text x="502" y="178" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">PnL by asset</text>
   <text x="502" y="206" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="12">BTC</text>
   <rect x="540" y="196" width="280" height="8" rx="4" fill="#0d1117"/>
   <rect x="540" y="196" width="280" height="8" rx="4" fill="#3fb950"/>
-  <text x="830" y="206" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$29.60</text>
+  <text x="830" y="206" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$41.34</text>
   <text x="502" y="232" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="12">ETH</text>
   <rect x="540" y="222" width="210" height="8" rx="4" fill="#3fb950"/>
-  <text x="830" y="232" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$22.06</text>
+  <text x="830" y="232" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$30.81</text>
   <text x="502" y="258" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="12">SOL</text>
   <rect x="540" y="248" width="225" height="8" rx="4" fill="#3fb950"/>
-  <text x="830" y="258" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$23.78</text>
+  <text x="830" y="258" fill="#3fb950" font-family="system-ui,sans-serif" font-size="12">+$33.30</text>
   <rect x="20" y="290" width="920" height="230" rx="10" fill="#161b22" stroke="#2d333b"/>
-  <text x="32" y="314" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">C<C;OB82=K9 PnL</text>
+  <text x="32" y="314" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Cumulative PnL</text>
   <polyline fill="none" stroke="#58a6ff" stroke-width="2.5" points="60,480 160,450 260,430 360,400 460,360 560,300 660,240 760,180 860,120"/>
   <polyline fill="none" stroke="#d29922" stroke-width="2" stroke-dasharray="8 4" points="60,480 160,448 260,425 360,392 460,350 560,288 660,228 760,168 860,105"/>
-  <text x="60" y="500" fill="#8b949e" font-family="system-ui,sans-serif" font-size="10">:0: 1K;></text>
-  <text x="140" y="500" fill="#8b949e" font-family="system-ui,sans-serif" font-size="10">A =>2K<8 ?@028;0<8</text>
+  <text x="60" y="500" fill="#8b949e" font-family="system-ui,sans-serif" font-size="10">actual</text>
+  <text x="120" y="500" fill="#8b949e" font-family="system-ui,sans-serif" font-size="10">new rules</text>
 </svg>

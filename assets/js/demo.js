@@ -24,7 +24,7 @@
     { cls: "warn", text: "[WARN] Binance confirm lag 340ms — within tolerance" },
     { cls: "settle", text: "[DEEP_DRAWDOWN] ETH DOWN cut @0.354 pnl=-$0.22" },
     { cls: "scan", text: "[SCAN] Funnel: found=142 rejected=118 attempted=8 filled=6" },
-    { cls: "settle", text: "[RESULT] Session PnL +$1.24 | 4W/1L | winrate 80%" },
+    { cls: "settle", text: "[RESULT] Session PnL +$1.24 | 4W/1L | win rate 80%" },
   ];
 
   let running = true;
@@ -33,9 +33,11 @@
   let dailyPnl = 1.24;
   let dailyW = 4;
   let dailyL = 1;
-  let totalPnl = 75.44;
+  let totalPnl = 105.45;
   let totalTrades = 432;
-  let winrate = 67.8;
+  let winrate = 75;
+  let wins = 324;
+  let losses = 108;
   let slotSeconds = 187;
   let funnel = { found: 142, rejected: 118, attempted: 8, filled: 6, exits: 5 };
   let logLines = [];
@@ -58,9 +60,9 @@
     const h = Math.floor(sec / 3600);
     const m = Math.floor((sec % 3600) / 60);
     const s = Math.floor(sec % 60);
-    if (h > 0) return `${h}ч ${m}м`;
-    if (m > 0) return `${m}м ${s}с`;
-    return `${s}с`;
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
   }
 
   function fmtSlot(sec) {
@@ -99,7 +101,7 @@
     const tbody = el("positions-tbody");
     if (!running || !position) {
       if (bar) bar.style.display = "none";
-      if (tbody) tbody.innerHTML = `<tr><td colspan="10" class="dim">Сейчас нет открытых позиций. Бот ищет сетапы с положительным EV…</td></tr>`;
+      if (tbody) tbody.innerHTML = `<tr><td colspan="10" class="dim">No open positions. Bot is scanning for positive-EV setups…</td></tr>`;
       return;
     }
     if (bar) {
@@ -110,7 +112,7 @@
       el("pos-card-entry").textContent = position.entry.toFixed(3);
       el("pos-card-stake").textContent = `$${position.stake.toFixed(2)}`;
       el("pos-card-edge").textContent = `+${position.edge.toFixed(3)}`;
-      el("pos-card-time").textContent = `${Math.round(position.secondsLeft)}с`;
+      el("pos-card-time").textContent = `${Math.round(position.secondsLeft)}s`;
     }
     if (tbody) {
       tbody.innerHTML = `
@@ -122,7 +124,7 @@
           <td>${position.pEst.toFixed(3)}</td>
           <td class="green-text">+${position.edge.toFixed(3)}</td>
           <td>+${(position.move * 100).toFixed(3)}%</td>
-          <td class="${position.secondsLeft < 30 ? "yellow-text" : ""}">${Math.round(position.secondsLeft)}с</td>
+          <td class="${position.secondsLeft < 30 ? "yellow-text" : ""}">${Math.round(position.secondsLeft)}s</td>
           <td class="dim">${position.signal}</td>
           <td class="dim">${position.slug}</td>
         </tr>`;
@@ -131,17 +133,17 @@
 
   function renderStats() {
     el("val-mode").textContent = running ? "PAPER" : "—";
-    el("sub-mode").textContent = running ? "Nautilus · авто-торговля вкл" : "нет данных";
+    el("sub-mode").textContent = running ? "Nautilus · auto-trade on" : "no data";
     el("val-balance").textContent = running ? `$${balance.toFixed(2)}` : "—";
-    el("sub-balance").textContent = running ? "виртуальный" : "";
+    el("sub-balance").textContent = running ? "virtual" : "";
     el("val-daily").textContent = running ? fmtPnl(dailyPnl) : "—";
     el("val-daily").className = `value ${dailyPnl >= 0 ? "green-text" : "red-text"}`;
     el("sub-daily").textContent = running ? `${dailyW}W / ${dailyL}L` : "";
     el("val-open").textContent = running ? "1" : "—";
-    el("sub-open").textContent = running ? "серия: 2W / 0L" : "";
+    el("sub-open").textContent = running ? "streak: 2W / 0L" : "";
     el("val-total").textContent = fmtPnl(totalPnl);
     el("val-total").className = `value green-text`;
-    el("sub-total").textContent = `${totalTrades} сделок, winrate ${winrate}%`;
+    el("sub-total").textContent = `${totalTrades} trades, win rate ${winrate}% (${wins}W / ${losses}L)`;
 
     el("f-found").textContent = funnel.found;
     el("f-rejected").textContent = funnel.rejected;
@@ -150,7 +152,7 @@
     el("f-exits").textContent = funnel.exits;
 
     el("status-dot").className = `dot ${running ? "on" : "off"}`;
-    el("status-text").textContent = running ? `Работает ${fmtUptime(uptimeSec)}` : "Остановлен";
+    el("status-text").textContent = running ? `Running ${fmtUptime(uptimeSec)}` : "Stopped";
     el("nautilus-pill").textContent = `slot ${fmtSlot(slotSeconds)} · subs 6 · inst 3 · grp 3`;
 
     el("btn-start").style.display = running ? "none" : "inline-block";

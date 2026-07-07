@@ -1,10 +1,10 @@
-# Как работает EV Scalp Pro
+# How EV Scalp Pro Works
 
-## Рынок
+## Market
 
-Бот торгует **5-минутные бинарные рынки Polymarket**: «BTC/ETH/SOL Up or Down в следующие 5 минут». Это короткие импульсные окна, где цена токена (0.01–0.99) отражает вероятность исхода.
+The bot trades **5-minute Polymarket binary markets**: "BTC/ETH/SOL Up or Down in the next 5 minutes." Short impulse windows where token price (0.01–0.99) reflects outcome probability.
 
-## Архитектура
+## Architecture
 
 ```
 Browser (localhost:8000)
@@ -18,72 +18,72 @@ Polymarket CLOB (WS quotes + book)  +  Binance REST (move_from_open)
 trade_history.jsonl + logs/bot_status.json
 ```
 
-## Цикл принятия решений
+## Decision cycle
 
-### 1. Получение данных
-- WebSocket котировки и стакан Polymarket
-- Binance: `move_from_open` (от open 5m окна) и `binance_move_pct` (lookback 60s)
-- Расчёт spread, depth, seconds_left до экспирации
+### 1. Data ingestion
+- Polymarket WebSocket quotes and order book
+- Binance: `move_from_open` (from 5m window open) and `binance_move_pct` (60s lookback)
+- Spread, depth, seconds_left to expiry
 
-### 2. EV-гейт (вход)
-Модель: **`edge = p_estimated − token_price`**
+### 2. EV gate (entry)
+Model: **`edge = p_estimated − token_price`**
 
-`p_estimated` берётся из калиброванной таблицы `probability_table.json` по:
-- активу (BTC/ETH/SOL)
+`p_estimated` comes from calibrated `probability_table.json` by:
+- asset (BTC/ETH/SOL)
 - `move_from_open`
 - `seconds_left`
 
-**Фильтры входа:**
-| Проверка | Зачем |
-|----------|-------|
-| Time window 45–180s | Лучшая зона по истории |
-| DOWN ≤120s | Ранние DOWN убыточны |
-| Edge ≥ 0.07–0.11 | Запас матожидания |
-| Price caps (UP ≤0.75) | Дорогие UP — низкий ROI |
-| STRICT_BINANCE_UP | Confirm тренда на BTC/ETH/SOL |
-| MAX_UP_PER_SLOT=1 | Нет кластерных лузов |
-| Spread / depth / book | Качество исполнения |
+**Entry filters:**
+| Check | Purpose |
+|-------|---------|
+| Time window 45–180s | Best zone historically |
+| DOWN ≤120s | Early DOWN trades lose |
+| Edge ≥ 0.07–0.11 | Expected value margin |
+| Price caps (UP ≤0.75) | Expensive UP — low ROI |
+| STRICT_BINANCE_UP | Trend confirm on BTC/ETH/SOL |
+| MAX_UP_PER_SLOT=1 | No clustered losses |
+| Spread / depth / book | Execution quality |
 
 ### 3. Risk guards (pre-trade)
 - `MAX_OPEN_POSITIONS`, `MAX_TOTAL_EXPOSURE_USD`
-- Trading pause при daily stop / loss streak
-- Dedup и suppression повторных сигналов
+- Trading pause on daily stop / loss streak
+- Dedup and signal suppression
 
-### 4. Exit policy (выход)
-Приоритет:
+### 4. Exit policy
+Priority:
 ```
 emergency → trailing_tp → take_profit → deep_drawdown_cut
          → thesis_exit → ev_exit → stop_loss
 ```
 
-| Exit | Роль |
+| Exit | Role |
 |------|------|
-| **take_profit** | +7% от входа → фиксация (главный профит) |
-| **trailing_take_profit** | Откат от пика после активации |
-| **deep_drawdown_cut** | Стоп при −26% от входа |
-| **ev_exit** | Edge модели ушёл в минус |
-| momentum_cut | Отключён (0% WR исторически) |
+| **take_profit** | +7% from entry → lock profit (main driver) |
+| **trailing_take_profit** | Pullback from peak after activation |
+| **deep_drawdown_cut** | Stop at −26% from entry |
+| **ev_exit** | Model edge turned negative |
+| momentum_cut | Disabled (0% WR historically) |
 
-## Режимы
+## Modes
 
-| Режим | Описание |
-|-------|----------|
-| **Paper** | Виртуальный баланс, realism (slippage, fill prob) |
-| **Live** | Polymarket CLOB V2 через py-clob-client |
+| Mode | Description |
+|------|-------------|
+| **Paper** | Virtual balance, realism (slippage, fill prob) |
+| **Live** | Polymarket CLOB V2 via py-clob-client |
 
-## Бэктест
+## Backtest
 
-Три уровня:
-1. **Fast replay** — entry на данных из лога
-2. **Full replay** — реальные Polymarket trades + book
-3. **Exit-sim** — выходы на фактических входах (самый надёжный для exit)
+Three levels:
+1. **Fast replay** — entries from log data
+2. **Full replay** — real Polymarket trades + book
+3. **Exit-sim** — exits on actual entries (most reliable for exit tuning)
 
-Скрипты: `compare_entry_rules.py`, `compare_runtime_backtest.py`, `compare_exit_variants.py`
+Scripts: `compare_entry_rules.py`, `compare_runtime_backtest.py`, `compare_exit_variants.py`
 
-## Стек
+## Stack
 
 - Python 3.11+
 - Nautilus Trader (event-driven)
 - FastAPI + React (web UI)
-- Binance Data API (калибровка)
+- Binance Data API (calibration)
 - Polymarket CLOB WebSocket
