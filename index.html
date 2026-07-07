@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EV Scalp Pro — Polymarket 5m Trading Bot (SaaS)</title>
+  <meta name="description" content="Прибыльный автоматический скальпинг-бот для Polymarket 5m рынков BTC/ETH/SOL. +$75 PnL, 67.8% win rate, веб-панель, бэктест, risk guards." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">EV <span>Scalp</span> Pro</div>
+      <div class="nav-links">
+        <a href="demo/">Демо</a>
+        <a href="#product">Продукт</a>
+        <a href="#how">Как работает</a>
+        <a href="#performance">Результаты</a>
+        <a href="#screenshots">Скриншоты</a>
+        <a href="#saas">SaaS</a>
+      </div>
+      <span class="badge-profit">● Прибыльный бот</span>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge-profit">Проверено на 432 сделках</span>
+        <h1>Автоматический скальпинг на Polymarket 5m</h1>
+        <p class="lead">
+          Готовый SaaS-продукт: event-driven бот на Nautilus Trader, EV-модель входа,
+          многоуровневая exit policy, веб-панель управления и встроенный бэктест.
+          <strong style="color:#22c55e">Исторически прибыльный</strong> на paper и live mix.
+        </p>
+        <div class="hero-stats">
+          <div class="stat"><div class="val">+$75.44</div><div class="lbl">Общий PnL</div></div>
+          <div class="stat"><div class="val">67.8%</div><div class="lbl">Win Rate</div></div>
+          <div class="stat"><div class="val">432</div><div class="lbl">Сделок в журнале</div></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="demo/">Открыть демо панели</a>
+          <a class="btn btn-secondary" href="#saas">Купить / лицензия</a>
+          <a class="btn btn-secondary" href="docs/HOW_IT_WORKS.md">Документация</a>
+        </div>
+      </div>
+      <div>
+        <a href="demo/"><img class="hero-shot" src="assets/screenshots/01-hero-dashboard.svg" alt="Dashboard EV Scalp Pro — нажмите для демо" /></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="product">
+    <div class="container">
+      <h2 class="section-title">Что вы покупаете</h2>
+      <p class="section-sub">Не скрипт «на коленке», а полноценная торговая система с UI, risk management и инструментами оптимизации.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Event-driven runtime</h3>
+          <p>Nautilus Trader: WebSocket котировки Polymarket CLOB, book deltas, debounced scan loop. Минимальная задержка реакции на рынок.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>EV-гейт с калибровкой</h3>
+          <p>Вход только когда оценённая вероятность (Binance klines + probability table) превышает цену токена с запасом edge. Data-driven, не «угадайка».</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Risk guards</h3>
+          <p>Exposure cap, max UP/slot, daily stop, loss streak pause, pre-trade checks. Защита от кластерных лузов на коррелированных активах.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Exit policy</h3>
+          <p>Take profit (+$195 исторически), trailing TP, deep drawdown cut, EV-exit, thesis exit. Оптимизировано бэктестом на реальных входах.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🖥️</div>
+          <h3>Web-панель</h3>
+          <p>Dashboard, сделки, консоль, настройки, бэктест — FastAPI + React. Запуск/стоп бота из браузера, live-статистика reject funnel.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔬</div>
+          <h3>Backtest tooling</h3>
+          <p>Fast/full replay, exit-sim, A/B профилей entry и exit. Parity с live: MAX_UP_PER_SLOT, реальный Binance move в симуляции.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="container">
+      <h2 class="section-title">Как работает бот</h2>
+      <p class="section-sub">Торгует 5-минутные бинарные рынки Polymarket: BTC / ETH / SOL Up or Down.</p>
+
+      <div class="flow">
+        <span class="flow-step">1. Quote/Book tick</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">2. Market context</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">3. EV-гейт</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">4. Risk guards</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">5. Entry</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">6. Exit policy</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Логика входа (EV-гейт)</h3>
+          <ul>
+            <li><code>edge = p_estimated − token_price</code> из калиброванной таблицы</li>
+            <li>Окно времени: 45–180s до экспирации (DOWN ≤120s)</li>
+            <li>Фильтры: spread, depth, book quality, Binance confirm</li>
+            <li>Price caps и MAX_UP_PER_SLOT = 1 на 5m-слот</li>
+            <li>Строгий отбор: ~10–17% сигналов проходят replay-фильтры</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Логика выхода</h3>
+          <ul>
+            <li><strong>take_profit</strong> — главный драйвер (+$195, 100% WR на TP)</li>
+            <li><strong>trailing_take_profit</strong> — фиксация на откате от пика</li>
+            <li><strong>deep_drawdown_cut</strong> — стоп при глубокой просадке (0.26)</li>
+            <li><strong>ev_exit</strong> — выход при потере edge по live-модели</li>
+            <li>momentum_cut отключён (исторически 0% WR)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="shot-block" style="margin-top:36px">
+        <h3>Архитектура системы</h3>
+        <img src="assets/screenshots/03-architecture.svg" alt="Архитектура EV Scalp Pro" />
+        <p class="shot-caption">Browser → FastAPI → Nautilus Strategy → Polymarket CLOB + Binance sidecar → trade journal</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="performance">
+    <div class="container">
+      <h2 class="section-title">Почему бот прибыльный</h2>
+      <p class="section-sub">Реальные цифры из <code>trade_history.jsonl</code> (paper + live mix, 432 закрытых сделки).</p>
+
+      <div class="grid-3" style="margin-bottom:32px">
+        <div class="card"><h3>BTC</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$29.60</p><p>97 сделок · WR 76.3%</p></div>
+        <div class="card"><h3>ETH</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$22.06</p><p>147 сделок · WR 67.1%</p></div>
+        <div class="card"><h3>SOL</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$23.78</p><p>188 сделок · WR 64.2%</p></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="shot-block">
+          <img src="assets/screenshots/04-performance.svg" alt="Performance analytics" />
+        </div>
+        <div class="shot-block">
+          <object type="image/svg+xml" data="assets/screenshots/06-cumulative-pnl-real.svg" style="width:100%;border-radius:14px;border:1px solid #1e293b"></object>
+          <p class="shot-caption">Кумулятивный PnL по журналу сделок (реальные данные)</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:24px">
+        <div class="card">
+          <h3>Главный драйвер прибыли</h3>
+          <p><strong style="color:#22c55e">take_profit: +$195</strong> на 234 сделках (100% WR). Бот забирает короткие импульсы в 5m-окне, не держит «на удачу».</p>
+        </div>
+        <div class="card">
+          <h3>Контроль убытков</h3>
+          <p>deep_drawdown (−$36) и ev_exit (−$33) ограничены exit policy. A/B бэктест показал улучшение +$6.33 при пороге DD 0.26 vs 0.22.</p>
+        </div>
+      </div>
+
+      <div class="shot-block" style="margin-top:24px">
+        <object type="image/svg+xml" data="assets/screenshots/07-exit-pnl-real.svg" style="width:100%;max-width:900px;border-radius:14px;border:1px solid #1e293b"></object>
+        <p class="shot-caption">PnL по типу выхода — из реального журнала</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="screenshots">
+    <div class="container">
+      <h2 class="section-title">Скриншоты продукта</h2>
+      <p class="section-sub">Веб-панель, бэктест, настройки и аналитика — всё из коробки.</p>
+
+      <div class="shot-block">
+        <h3>Dashboard — live-статус, баланс, позиции</h3>
+        <a href="demo/"><img src="assets/screenshots/01-hero-dashboard.svg" alt="Dashboard" /></a>
+      </div>
+      <div class="shot-block">
+        <h3>Backtest — сравнение exit-политик</h3>
+        <img src="assets/screenshots/02-backtest.svg" alt="Backtest" />
+      </div>
+      <div class="shot-block">
+        <h3>Settings — 50+ параметров стратегии</h3>
+        <img src="assets/screenshots/05-settings.svg" alt="Settings" />
+      </div>
+    </div>
+  </section>
+
+  <section id="saas" class="pricing">
+    <div class="container">
+      <h2 class="section-title">SaaS / White-label</h2>
+      <p class="section-sub">Готов к продаже как self-hosted SaaS или лицензия на код + поддержка.</p>
+
+      <div class="grid-3">
+        <div class="card price-card">
+          <h3>Starter</h3>
+          <div class="price">Self-hosted</div>
+          <ul style="text-align:left;margin-top:16px">
+            <li>Полный исходный код</li>
+            <li>Web-панель + документация</li>
+            <li>Paper trading из коробки</li>
+            <li>Бэктест tooling</li>
+          </ul>
+        </div>
+        <div class="card price-card featured">
+          <h3>Pro</h3>
+          <div class="price">SaaS-ready</div>
+          <ul style="text-align:left;margin-top:16px">
+            <li>Всё из Starter</li>
+            <li>Live trading (CLOB V2)</li>
+            <li>Калиброванная EV-модель</li>
+            <li>Оптимизированные exit rules</li>
+            <li>Risk guards + slot limits</li>
+          </ul>
+        </div>
+        <div class="card price-card">
+          <h3>Enterprise</h3>
+          <div class="price">Custom</div>
+          <ul style="text-align:left;margin-top:16px">
+            <li>White-label UI</li>
+            <li>Multi-tenant deployment</li>
+            <li>Доработка стратегии</li>
+            <li>Приоритетная поддержка</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:28px;text-align:center">
+        <h3>Попробуйте демо</h3>
+        <p style="margin-top:12px">
+          Интерактивная веб-панель с симуляцией торговли — дашборд, консоль, бэктест, настройки.
+        </p>
+        <p style="margin-top:16px">
+          <a class="btn btn-primary" href="demo/" style="display:inline-flex">Открыть live demo →</a>
+        </p>
+      </div>
+
+      <div class="card" style="margin-top:28px;text-align:center">
+        <h3>Ключевые преимущества для покупателя</h3>
+        <p style="margin-top:12px">
+          ✅ Прибыльная история (+$75 на $1–2 stake) &nbsp;·&nbsp;
+          ✅ Не black box — полный код и бэктест &nbsp;·&nbsp;
+          ✅ Nautilus Trader (production-grade) &nbsp;·&nbsp;
+          ✅ Polymarket 5m — растущий сегмент &nbsp;·&nbsp;
+          ✅ Готовая веб-панель
+        </p>
+        <p style="margin-top:16px;color:#94a3b8">Контакт для демо и due diligence: укажите ваш email / Telegram в README</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><strong>EV Scalp Pro</strong> — Polymarket 5m Scalping Bot · Python 3.11+ · Nautilus Trader · FastAPI</p>
+      <p class="disclaimer">
+        Disclaimer: прошлые результаты не гарантируют будущую прибыль. Торговля на prediction markets связана с риском.
+        Цифры PnL взяты из trade_history.jsonl проекта (432 сделки, paper+live mix). Не является финансовой рекомендацией.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

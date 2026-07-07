@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="100%" height="100%" fill="#0d1117"/>
+  <rect width="960" height="44" fill="#161b22"/>
+  <text x="20" y="28" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="700">Polymarket Bot</text>
+  <text x="368" y="27" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">0H1>@4</text>
+  <rect x="440" y="12" width="80" height="22" rx="6" fill="#1f2630"/>
+  <text x="452" y="27" fill="#58a6ff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">0AB@>9:8</text>
+  <rect x="20" y="58" width="920" height="56" rx="10" fill="#161b22" stroke="#2d333b"/>
+  <text x="32" y="82" fill="#8b949e" font-family="system-ui,sans-serif" font-size="12">50+ ?0@0<5B@>2 AB@0B5388 G5@57 FastAPI · 87<5=5=8O B@51CNB ?5@570?CA:0</text>
+  <rect x="20" y="130" width="920" height="52" rx="10" fill="#161b22" stroke="#2d333b"/>
+  <text x="32" y="162" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">¾ A=>2=K5</text>
+  <rect x="20" y="190" width="920" height="120" rx="0" fill="rgba(22,27,34,0.5)" stroke="#2d333b"/>
+  <text x="32" y="220" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13">PAPER_TRADE</text>
+  <rect x="860" y="206" width="40" height="22" rx="11" fill="#1f6feb"/>
+  <circle cx="878" cy="217" r="7" fill="#fff"/>
+  <line x1="32" y1="232" x2="908" y2="232" stroke="#2d333b" opacity="0.5"/>
+  <text x="32" y="258" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13">AUTO_TRADE</text>
+  <rect x="860" y="244" width="40" height="22" rx="11" fill="#1f6feb"/>
+  <circle cx="878" cy="255" r="7" fill="#fff"/>
+  <line x1="32" y1="270" x2="908" y2="270" stroke="#2d333b" opacity="0.5"/>
+  <text x="32" y="296" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="13">ASSETS</text>
+  <text x="800" y="296" fill="#8b949e" font-family="system-ui,sans-serif" font-size="13">BTC, ETH, SOL</text>
+  <rect x="20" y="326" width="920" height="52" rx="10" fill="#161b22" stroke="#2d333b"/>
+  <text x="32" y="358" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">¸ EV-359B</text>
+  <rect x="20" y="386" width="920" height="52" rx="10" fill="#161b22" stroke="#2d333b"/>
+  <text x="32" y="418" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">¸ Exit policy</text>
+  <rect x="20" y="456" width="920" height="52" rx="10" fill="#161b22" stroke="#2d333b"/>
+  <text x="32" y="488" fill="#e6edf3" font-family="system-ui,sans-serif" font-size="14" font-weight="600">¸ Risk guards</text>
+</svg>

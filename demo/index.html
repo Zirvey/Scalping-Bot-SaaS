@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polymarket Bot — Live Demo</title>
+  <meta name="description" content="Интерактивное демо веб-панели EV Scalp Pro — скальпинг-бот для Polymarket 5m рынков." />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
+</head>
+<body>
+  <div class="demo-app">
+    <div class="demo-banner">
+      🎭 <strong>Демо-режим</strong> — симуляция работы бота с тестовыми данными. Реальная торговля не выполняется.
+      <a href="../index.html">← Вернуться на лендинг</a>
+    </div>
+
+    <header class="topbar">
+      <span class="logo">Polymarket Bot</span>
+      <nav class="tabs">
+        <button class="active" data-tab="dashboard">Дашборд</button>
+        <button data-tab="backtest">Backtest</button>
+        <button data-tab="console">Консоль</button>
+        <button data-tab="settings">Настройки</button>
+        <button data-tab="trades">Сделки</button>
+      </nav>
+      <div class="spacer"></div>
+      <span class="nautilus-pill dim" id="nautilus-pill">slot 3:07 left · subs 6 · inst 3 · grp 3</span>
+      <span class="status-pill">
+        <span class="dot on" id="status-dot"></span>
+        <span id="status-text">Работает 1ч 4м</span>
+        <span class="dim">nautilus</span>
+      </span>
+      <button class="btn" id="btn-restart">Перезапустить</button>
+      <button class="btn danger" id="btn-stop">Остановить</button>
+      <button class="btn green" id="btn-start" style="display:none">Запустить</button>
+    </header>
+
+    <div class="open-pos-bar" id="open-pos-bar">
+      <div class="open-pos-bar-label">
+        Открытые позиции: <strong>1</strong>
+      </div>
+      <div class="open-pos-cards">
+        <div class="pos-card pos-up">
+          <div class="pos-card-head">
+            <span class="pos-asset" id="pos-card-asset">BTC</span>
+            <span class="badge up" id="pos-card-dir">UP</span>
+            <span class="dim" style="font-size:10px;margin-left:auto">paper</span>
+          </div>
+          <div class="dim" style="font-size:13px">
+            Вход <strong id="pos-card-entry">0.412</strong> ·
+            Ставка <strong id="pos-card-stake">$1.50</strong> ·
+            Edge <strong class="green-text" id="pos-card-edge">+0.073</strong> ·
+            <span id="pos-card-time">87с</span> до экспирации
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main class="page">
+      <!-- Dashboard -->
+      <div class="tab-panel active" id="tab-dashboard">
+        <div class="cards">
+          <div class="card">
+            <div class="label">Режим</div>
+            <div class="value" id="val-mode">PAPER</div>
+            <div class="sub" id="sub-mode">Nautilus · авто-торговля вкл</div>
+          </div>
+          <div class="card">
+            <div class="label">Баланс</div>
+            <div class="value" id="val-balance">$102.34</div>
+            <div class="sub" id="sub-balance">виртуальный</div>
+          </div>
+          <div class="card">
+            <div class="label">PnL за день</div>
+            <div class="value green-text" id="val-daily">+$1.24</div>
+            <div class="sub" id="sub-daily">4W / 1L</div>
+          </div>
+          <div class="card">
+            <div class="label">Открытые позиции</div>
+            <div class="value" id="val-open">1</div>
+            <div class="sub" id="sub-open">серия: 2W / 0L</div>
+          </div>
+          <div class="card">
+            <div class="label">Всего (история)</div>
+            <div class="value green-text" id="val-total">+$75.44</div>
+            <div class="sub" id="sub-total">432 сделок, winrate 67.8%</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Открытые позиции (1)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Актив</th><th>Направление</th><th>Вход</th><th>Ставка</th>
+                <th>p_est</th><th>edge</th><th>move</th><th>До экспирации</th><th>Сигнал</th><th>Рынок</th>
+              </tr>
+            </thead>
+            <tbody id="positions-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h3>Воронка сигналов (сессия)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Найдено сигналов</th><th>Отклонено фильтрами</th>
+                <th>Попыток входа</th><th>Входов исполнено</th><th>Выходов</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="f-found">142</td>
+                <td id="f-rejected">118</td>
+                <td id="f-attempted">8</td>
+                <td id="f-filled">6</td>
+                <td id="f-exits">5</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="dim" style="margin-top:10px;font-size:12px">
+            Топ причин отклонения: edge_too_low: 48 · time_window: 31 · spread_wide: 22 · binance_confirm: 17
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Последние сделки</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Время</th><th>Актив</th><th>Направление</th><th>Вход</th>
+                <th>Ставка</th><th>PnL</th><th>Результат</th><th>Источник</th>
+              </tr>
+            </thead>
+            <tbody id="trades-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Backtest -->
+      <div class="tab-panel" id="tab-backtest">
+        <div class="bt-hero">
+          <h2 style="margin:0 0 8px;font-size:18px">Exit-sim бэктест</h2>
+          <p class="dim" style="margin:0;font-size:13px;max-width:640px">
+            Симуляция exit-политики на 432 исторических входах из trade_history.jsonl.
+            Сравнение «как было» vs «с новыми правилами».
+          </p>
+        </div>
+
+        <div class="bt-verdict">
+          <strong class="green-text">Вердикт:</strong> новая exit policy (DD cut 0.26) улучшает PnL на <strong>+$6.33</strong>
+          при том же наборе входов. Take profit остаётся главным драйвером (+$195).
+        </div>
+
+        <div class="panel">
+          <h3>EV-гейт (replay)</h3>
+          <p class="dim" style="font-size:13px;margin:0 0 14px">Сколько сигналов прошло бы фильтры на исторических данных</p>
+          <div class="bt-gate-stats">
+            <div><span class="dim">Всего сигналов</span><div class="bt-gate-num">1,247</div></div>
+            <div><span class="dim">Прошли EV-гейт</span><div class="bt-gate-num green-text">432</div></div>
+            <div><span class="dim">Pass rate</span><div class="bt-gate-num">34.6%</div></div>
+            <div><span class="dim">Strict replay</span><div class="bt-gate-num">~17%</div></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>PnL по активам</h3>
+          <div class="bt-asset-bars">
+            <div class="bt-asset-row">
+              <span class="bt-asset-name">BTC</span>
+              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:100%"></div></div>
+              <span class="green-text">+$29.60</span>
+              <span class="dim">97 · 76%</span>
+            </div>
+            <div class="bt-asset-row">
+              <span class="bt-asset-name">ETH</span>
+              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:75%"></div></div>
+              <span class="green-text">+$22.06</span>
+              <span class="dim">147 · 67%</span>
+            </div>
+            <div class="bt-asset-row">
+              <span class="bt-asset-name">SOL</span>
+              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:80%"></div></div>
+              <span class="green-text">+$23.78</span>
+              <span class="dim">188 · 64%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Кумулятивный PnL</h3>
+          <svg class="bt-chart" viewBox="0 0 640 200" role="img">
+            <line x1="44" y1="40" x2="628" y2="40" class="bt-grid"/>
+            <line x1="44" y1="100" x2="628" y2="100" class="bt-grid"/>
+            <line x1="44" y1="160" x2="628" y2="160" class="bt-grid"/>
+            <line x1="44" y1="160" x2="628" y2="160" class="bt-zero"/>
+            <text x="38" y="44" text-anchor="end" class="bt-axis">$75</text>
+            <text x="38" y="104" text-anchor="end" class="bt-axis">$38</text>
+            <text x="38" y="164" text-anchor="end" class="bt-axis">$0</text>
+            <path class="bt-line actual" d="M44,160 L120,148 L200,142 L280,130 L360,118 L440,95 L520,72 L600,40"/>
+            <path class="bt-line sim" d="M44,160 L120,146 L200,138 L280,125 L360,110 L440,88 L520,65 L600,32"/>
+            <text x="44" y="192" class="bt-axis">1</text>
+            <text x="600" y="192" text-anchor="end" class="bt-axis">сделка 432</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Console -->
+      <div class="tab-panel" id="tab-console">
+        <div class="console-toolbar">
+          <span class="status-pill"><span class="dot on"></span> подключено</span>
+          <button class="chip active">Все</button>
+          <button class="chip">Ордера</button>
+          <button class="chip">Сканирование</button>
+          <button class="chip">Фильтры</button>
+          <button class="chip">Settlement</button>
+        </div>
+        <div class="console" id="console-box"></div>
+      </div>
+
+      <!-- Settings -->
+      <div class="tab-panel" id="tab-settings">
+        <p class="dim" style="margin:0 0 18px;padding:12px 14px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;font-size:13px">
+          Демо: настройки отображаются для ознакомления. В полной версии — 50+ параметров через FastAPI.
+        </p>
+
+        <details class="settings-group" open>
+          <summary>Основные</summary>
+          <div class="settings-fields">
+            <div class="field"><span>PAPER_TRADE</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+            <div class="field"><span>AUTO_TRADE</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+            <div class="field"><span>ASSETS</span><span class="dim">BTC, ETH, SOL</span></div>
+          </div>
+        </details>
+
+        <details class="settings-group" open>
+          <summary>Ставки и лимиты</summary>
+          <div class="settings-fields">
+            <div class="field"><span>STAKE_USD</span><span>1.50</span></div>
+            <div class="field"><span>MAX_OPEN_POSITIONS</span><span>3</span></div>
+            <div class="field"><span>MAX_TOTAL_EXPOSURE_USD</span><span>5.00</span></div>
+            <div class="field"><span>MAX_UP_PER_SLOT</span><span>1</span></div>
+          </div>
+        </details>
+
+        <details class="settings-group">
+          <summary>EV-гейт</summary>
+          <div class="settings-fields">
+            <div class="field"><span>MIN_EDGE</span><span>0.07</span></div>
+            <div class="field"><span>MIN_SECONDS_LEFT</span><span>45</span></div>
+            <div class="field"><span>MAX_SECONDS_LEFT</span><span>180</span></div>
+            <div class="field"><span>STRICT_BINANCE_UP</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+          </div>
+        </details>
+
+        <details class="settings-group">
+          <summary>Exit policy</summary>
+          <div class="settings-fields">
+            <div class="field"><span>TAKE_PROFIT_PCT</span><span>0.07</span></div>
+            <div class="field"><span>DEEP_DRAWDOWN_CUT</span><span>0.26</span></div>
+            <div class="field"><span>TRAILING_TP_ENABLED</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
+            <div class="field"><span>MOMENTUM_CUT_ENABLED</span><label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Trades -->
+      <div class="tab-panel" id="tab-trades">
+        <div class="panel">
+          <h3>История сделок</h3>
+          <p class="dim" style="font-size:12px;margin:0 0 12px">432 закрытых сделок · paper + live mix · winrate 67.8%</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Время</th><th>Актив</th><th>Направление</th><th>Вход</th>
+                <th>Ставка</th><th>PnL</th><th>Результат</th><th>Источник</th>
+              </tr>
+            </thead>
+            <tbody id="trades-tbody-full">
+              <!-- filled by same data via JS below -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cards">
+          <div class="card"><div class="label">Общий PnL</div><div class="value green-text">+$75.44</div></div>
+          <div class="card"><div class="label">Win Rate</div><div class="value">67.8%</div></div>
+          <div class="card"><div class="label">Лучший exit</div><div class="value green-text">take_profit</div><div class="sub">+$195 · 234 сделки</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/demo.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const src = document.getElementById("trades-tbody");
+        const dst = document.getElementById("trades-tbody-full");
+        if (src && dst) dst.innerHTML = src.innerHTML;
+      }, 50);
+    });
+  </script>
+</body>
+</html>
