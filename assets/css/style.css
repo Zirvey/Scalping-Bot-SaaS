@@ -24,12 +24,54 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   letter-spacing: -0.01em;
+  position: relative;
+}
+
+.velaris-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.velaris-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent 40%, rgba(0, 0, 0, 0.6));
+}
+
+.velaris-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.deck-shell {
+  position: relative;
+  z-index: 1;
 }
 
 a {
@@ -52,8 +94,16 @@ nav {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(12px);
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid rgba(48, 50, 54, 0.5);
+  transition:
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+
+nav.nav-scrolled {
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom-color: rgba(48, 50, 54, 0.9);
 }
 
 .nav-inner {
@@ -88,8 +138,28 @@ nav {
   color: var(--muted);
 }
 
-.nav-links a:hover {
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease-out;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--neon);
+  transition: width 0.25s ease-out;
+}
+
+.nav-link:hover {
   color: var(--text);
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .badge-profit {
@@ -109,9 +179,147 @@ nav {
 
 .hero {
   padding: 72px 0 56px;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(52, 213, 154, 0.14), transparent),
-    radial-gradient(ellipse 50% 40% at 90% 20%, rgba(52, 213, 154, 0.06), transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1,
+.hero .lead,
+.hero .badge-profit {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.92),
+    0 0 24px rgba(0, 0, 0, 0.55);
+}
+
+.hero-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: hero-fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--d, 0) * 0.1s + 0.05s);
+}
+
+@keyframes hero-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-chart-panel {
+  margin: 20px 0 8px;
+  max-width: 420px;
+  padding: 14px 16px 12px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.hero-chart-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.hero-chart-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.hero-chart-val {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--neon);
+}
+
+.hero-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 72px;
+  padding: 8px;
+  background: #000;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.hero-chart-bar {
+  flex: 1;
+  height: 0;
+  background: linear-gradient(to top, #285d49 0%, var(--neon) 100%);
+  border-radius: 2px 2px 0 0;
+  transform-origin: bottom;
+}
+
+.helix-glow {
+  box-shadow: 0 0 40px rgba(52, 213, 154, 0.08);
+}
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.tag-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 8px rgba(52, 213, 154, 0.6);
+  animation: tag-pulse 2s ease-in-out infinite;
+}
+
+@keyframes tag-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(52, 213, 154, 0.6);
+  }
+  50% {
+    opacity: 0.65;
+    box-shadow: 0 0 14px rgba(52, 213, 154, 0.9);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+.stagger-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-grid {
@@ -270,6 +478,7 @@ nav {
 section {
   padding: 64px 0;
   border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .section-title {
@@ -303,6 +512,27 @@ section {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 22px;
+}
+
+.neon-card-interactive {
+  transition:
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+.neon-card-interactive:hover {
+  border-color: rgba(52, 213, 154, 0.35);
+  box-shadow: 0 0 32px rgba(52, 213, 154, 0.08);
+  transform: scale(1.02);
+}
+
+.shot-card.neon-card-interactive:hover img {
+  transform: scale(1.01);
+}
+
+.shot-card img {
+  transition: transform 0.25s ease-out;
 }
 
 .card h3 {
@@ -419,6 +649,19 @@ section {
   transform: translateY(-2px);
 }
 
+.preview-card.shot-link {
+  transition:
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+.preview-card.shot-link:hover {
+  border-color: rgba(52, 213, 154, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(52, 213, 154, 0.12);
+}
+
 .link-arrow {
   display: inline-block;
   margin-top: 12px;
@@ -490,6 +733,25 @@ footer p {
 .disclaimer {
   margin-top: 10px;
   font-size: 0.78rem !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  [data-reveal],
+  .stagger-item {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .tag-badge::before {
+    animation: none;
+  }
+
+  .neon-card-interactive:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 900px) {

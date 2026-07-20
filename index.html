@@ -6,20 +6,26 @@
   <title>Helix Trade — Polymarket Scalping SaaS (For Sale)</title>
   <meta name="description" content="Buy Helix Trade: turnkey Polymarket 5m scalping SaaS. +$533 PnL, 74.6% win rate, 1,632 trades. Website, bot, dashboard, subscription UX included." />
   <link rel="icon" href="assets/helix.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <nav>
+  <div id="velaris-bg" class="velaris-bg" aria-hidden="true"></div>
+
+  <div class="deck-shell">
+  <nav id="deck-nav">
     <div class="container nav-inner">
       <a class="logo" href="./">
         <img src="assets/helix.svg" alt="" width="22" height="22" />
         Helix <span>Trade</span>
       </a>
       <div class="nav-links">
-        <a href="#product">Product</a>
-        <a href="#results">Results</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#pricing">Pricing</a>
+        <a class="nav-link" href="#product">Product</a>
+        <a class="nav-link" href="#results">Results</a>
+        <a class="nav-link" href="#screenshots">Screenshots</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
       </div>
       <span class="badge-profit">● For sale</span>
     </div>
@@ -28,26 +34,33 @@
   <header class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="badge-profit">Verified on 1,632 paper trades</span>
-        <h1>Polymarket scalping SaaS — ready to launch</h1>
-        <p class="lead">
+        <span class="badge-profit hero-enter" style="--d:0">Verified on 1,632 paper trades</span>
+        <h1 class="hero-enter" style="--d:1">Polymarket scalping SaaS — ready to launch</h1>
+        <p class="lead hero-enter" style="--d:2">
           <strong>Helix Trade</strong> is a complete product for sale: branded website, trader dashboard,
           automated 5-minute scalping bot, and subscription-ready user experience.
           Start selling access — not building from scratch.
         </p>
-        <div class="hero-stats">
-          <div class="stat"><div class="val">+$533</div><div class="lbl">Total PnL</div></div>
-          <div class="stat"><div class="val">74.6%</div><div class="lbl">Win rate</div></div>
-          <div class="stat"><div class="val">1,632</div><div class="lbl">Trades</div></div>
+        <div class="hero-stats hero-enter" style="--d:3">
+          <div class="stat"><div class="val" data-count-up="533" data-prefix="+$" data-count-immediate="true">+$533</div><div class="lbl">Total PnL</div></div>
+          <div class="stat"><div class="val" data-count-up="74.6" data-suffix="%" data-decimals="1" data-count-immediate="true">74.6%</div><div class="lbl">Win rate</div></div>
+          <div class="stat"><div class="val" data-count-up="1632" data-count-immediate="true">1,632</div><div class="lbl">Trades</div></div>
         </div>
-        <div class="cta-row">
+        <div class="hero-chart-panel hero-enter helix-glow" style="--d:4">
+          <div class="hero-chart-meta">
+            <span class="hero-chart-label">take_profit</span>
+            <span class="hero-chart-val" data-count-up="419" data-prefix="+$" data-count-immediate="true">+$419</span>
+          </div>
+          <div class="hero-chart-bars" aria-hidden="true"></div>
+        </div>
+        <div class="cta-row hero-enter" style="--d:5">
           <a class="btn btn-primary" href="helix/">View product UI</a>
           <a class="btn btn-secondary" href="demo/">Try bot demo</a>
           <a class="btn btn-ghost" href="#pricing">License options</a>
         </div>
       </div>
-      <div class="hero-preview">
-        <a class="preview-card shot-link" href="helix/">
+      <div class="hero-preview hero-enter" style="--d:3">
+        <a class="preview-card shot-link helix-glow" href="helix/">
           <img src="assets/screenshots/01-helix-landing.png" alt="Helix Trade landing page" />
           <span class="preview-cta">Open product UI →</span>
         </a>
@@ -57,35 +70,38 @@
 
   <section id="product">
     <div class="container">
-      <h2 class="section-title">Everything included</h2>
-      <p class="section-sub">One purchase. Full stack. Ready for your brand, your users, your revenue.</p>
-      <div class="grid-3">
-        <div class="card">
+      <div data-reveal>
+        <p class="tag-badge">Product</p>
+        <h2 class="section-title">Everything included</h2>
+        <p class="section-sub">One purchase. Full stack. Ready for your brand, your users, your revenue.</p>
+      </div>
+      <div class="grid-3" data-stagger>
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">🌐</div>
           <h3>Marketing website</h3>
           <p>Premium neon landing, pricing page, sign-up flows, and product positioning — ready to deploy.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">📊</div>
           <h3>Trader dashboard</h3>
           <p>Balance, open positions, PnL, win rate, trade journal, and session analytics — what paying users expect.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">🤖</div>
           <h3>Scalping bot</h3>
           <p>Automated BTC / ETH / SOL 5m Up/Down on Polymarket. Paper mode included; built to scale to live.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">💳</div>
           <h3>Subscription UX</h3>
           <p>Free trial and $25/mo full-access tiers already designed — plug in billing and go.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">🛡️</div>
           <h3>Risk management</h3>
           <p>Exposure limits, daily stops, slot caps, and auto-pause — built to protect users and your reputation.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <div class="icon">📈</div>
           <h3>Proven edge</h3>
           <p>Smart entries and managed exits tuned on real trade history — take profit drives +$419 of gains.</p>
@@ -96,53 +112,59 @@
 
   <section id="results">
     <div class="container">
-      <h2 class="section-title">Track record</h2>
-      <p class="section-sub">Paper trading journal — 1,632 closed trades across BTC, ETH, and SOL.</p>
-
-      <div class="grid-3" style="margin-bottom:32px">
-        <div class="card"><h3>BTC</h3><p class="metric-val">+$173</p><p>468 trades · 76.9% WR</p></div>
-        <div class="card"><h3>ETH</h3><p class="metric-val">+$155</p><p>555 trades · 73.3% WR</p></div>
-        <div class="card"><h3>SOL</h3><p class="metric-val">+$205</p><p>609 trades · 74.1% WR</p></div>
+      <div data-reveal>
+        <p class="tag-badge">Track record</p>
+        <h2 class="section-title">Verified performance</h2>
+        <p class="section-sub">Paper trading journal — 1,632 closed trades across BTC, ETH, and SOL.</p>
       </div>
 
-      <div class="grid-2">
-        <div class="shot-block">
+      <div class="grid-3" data-stagger style="margin-bottom:32px">
+        <div class="card neon-card-interactive stagger-item"><h3>BTC</h3><p class="metric-val" data-count-up="173" data-prefix="+$">+$173</p><p>468 trades · 76.9% WR</p></div>
+        <div class="card neon-card-interactive stagger-item"><h3>ETH</h3><p class="metric-val" data-count-up="155" data-prefix="+$">+$155</p><p>555 trades · 73.3% WR</p></div>
+        <div class="card neon-card-interactive stagger-item"><h3>SOL</h3><p class="metric-val" data-count-up="205" data-prefix="+$">+$205</p><p>609 trades · 74.1% WR</p></div>
+      </div>
+
+      <div class="grid-2" data-stagger="0.12">
+        <div class="shot-block stagger-item">
           <object type="image/svg+xml" data="assets/screenshots/06-cumulative-pnl-real.svg"></object>
           <p class="shot-caption">Cumulative PnL growth over 1,632 trades</p>
         </div>
-        <div class="shot-block">
+        <div class="shot-block stagger-item">
           <object type="image/svg+xml" data="assets/screenshots/07-exit-pnl-real.svg"></object>
           <p class="shot-caption">Profit driven by take-profit exits (+$419)</p>
         </div>
       </div>
 
-      <div class="grid-3" style="margin-top:28px">
-        <div class="card"><h3>Win rate</h3><p class="metric-val">74.6%</p><p>1,218 wins · 414 losses</p></div>
-        <div class="card"><h3>Avg stake</h3><p class="metric-val">$3–4</p><p>Scalable position sizing</p></div>
-        <div class="card"><h3>Markets</h3><p class="metric-val">5 min</p><p>BTC · ETH · SOL Up/Down</p></div>
+      <div class="grid-3" data-stagger style="margin-top:28px">
+        <div class="card neon-card-interactive stagger-item"><h3>Win rate</h3><p class="metric-val" data-count-up="74.6" data-suffix="%" data-decimals="1">74.6%</p><p>1,218 wins · 414 losses</p></div>
+        <div class="card neon-card-interactive stagger-item"><h3>Avg stake</h3><p class="metric-val">$3–4</p><p>Scalable position sizing</p></div>
+        <div class="card neon-card-interactive stagger-item"><h3>Markets</h3><p class="metric-val">5 min</p><p>BTC · ETH · SOL Up/Down</p></div>
       </div>
     </div>
   </section>
 
   <section id="screenshots">
     <div class="container">
-      <h2 class="section-title">Product screenshots</h2>
-      <p class="section-sub">Real UI from the shipped product — sidebar trader cabinet, landing, and pricing.</p>
+      <div data-reveal>
+        <p class="tag-badge">Screenshots</p>
+        <h2 class="section-title">Product screenshots</h2>
+        <p class="section-sub">Real UI from the shipped product — sidebar trader cabinet, landing, and pricing.</p>
+      </div>
 
-      <div class="shot-grid">
-        <figure class="shot-card">
+      <div class="shot-grid" data-stagger="0.1">
+        <figure class="shot-card stagger-item neon-card-interactive">
           <a href="helix/"><img src="assets/screenshots/01-helix-landing.png" alt="Helix Trade landing" loading="lazy" /></a>
           <figcaption>Landing page & live stats</figcaption>
         </figure>
-        <figure class="shot-card">
+        <figure class="shot-card stagger-item neon-card-interactive">
           <a href="demo/"><img src="assets/screenshots/02-dashboard.png" alt="Trader dashboard" loading="lazy" /></a>
           <figcaption>Trader dashboard · paper mode</figcaption>
         </figure>
-        <figure class="shot-card">
+        <figure class="shot-card stagger-item neon-card-interactive">
           <a href="demo/"><img src="assets/screenshots/03-backtest.png" alt="Backtest analytics" loading="lazy" /></a>
           <figcaption>Backtest · +$533 on 1,632 trades</figcaption>
         </figure>
-        <figure class="shot-card">
+        <figure class="shot-card stagger-item neon-card-interactive">
           <a href="helix/#pricing"><img src="assets/screenshots/04-pricing.png" alt="Pricing page" loading="lazy" /></a>
           <figcaption>Pricing & subscriptions</figcaption>
         </figure>
@@ -152,22 +174,25 @@
 
   <section id="how">
     <div class="container">
-      <h2 class="section-title">How you monetize</h2>
-      <p class="section-sub">A clear path from purchase to recurring revenue.</p>
-      <div class="grid-2">
-        <div class="card">
+      <div data-reveal>
+        <p class="tag-badge">Monetization</p>
+        <h2 class="section-title">How you monetize</h2>
+        <p class="section-sub">A clear path from purchase to recurring revenue.</p>
+      </div>
+      <div class="grid-2" data-stagger>
+        <div class="card neon-card-interactive stagger-item">
           <h3>1. Acquire & rebrand</h3>
           <p>Get full source, Helix Trade design, and bot. Rebrand or launch as-is.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <h3>2. Onboard users in paper</h3>
           <p>Free trial with virtual balance — no wallet friction, high conversion.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <h3>3. Convert to paid</h3>
           <p>$25/mo full-access tier unlocks dashboard, journal, and advanced features.</p>
         </div>
-        <div class="card">
+        <div class="card neon-card-interactive stagger-item">
           <h3>4. Scale live trading</h3>
           <p>Roadmap includes wallet agent for users who want real Polymarket execution.</p>
         </div>
@@ -177,10 +202,13 @@
 
   <section id="pricing" class="pricing">
     <div class="container">
-      <h2 class="section-title">Licensing options</h2>
-      <p class="section-sub">Flexible handoff — source code, SaaS deployment, or white-label.</p>
-      <div class="grid-3">
-        <div class="card price-card">
+      <div data-reveal>
+        <p class="tag-badge">Licensing</p>
+        <h2 class="section-title">Licensing options</h2>
+        <p class="section-sub">Flexible handoff — source code, SaaS deployment, or white-label.</p>
+      </div>
+      <div class="grid-3" data-stagger="0.12">
+        <div class="card price-card neon-card-interactive stagger-item">
           <h3>Source license</h3>
           <div class="price">Full repo</div>
           <ul>
@@ -190,7 +218,7 @@
             <li>Documentation handoff</li>
           </ul>
         </div>
-        <div class="card price-card featured">
+        <div class="card price-card featured neon-card-interactive stagger-item">
           <h3>SaaS-ready</h3>
           <div class="price">Launch kit</div>
           <ul>
@@ -201,7 +229,7 @@
             <li>Priority handoff support</li>
           </ul>
         </div>
-        <div class="card price-card">
+        <div class="card price-card neon-card-interactive stagger-item">
           <h3>Enterprise</h3>
           <div class="price">Custom</div>
           <ul>
@@ -213,7 +241,7 @@
         </div>
       </div>
 
-      <div class="card cta-card">
+      <div class="card cta-card neon-card-interactive" data-reveal>
         <h3>See it yourself</h3>
         <p>Explore the product before you buy — UI, dashboard, and simulated bot panel.</p>
         <p style="margin-top:16px">
@@ -231,5 +259,9 @@
       <p class="disclaimer">Past performance does not guarantee future results. Trading involves risk. Not financial advice.</p>
     </div>
   </footer>
+  </div>
+
+  <script src="assets/js/velaris-bg.js"></script>
+  <script src="assets/js/deck.js"></script>
 </body>
 </html>
