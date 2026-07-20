@@ -10,7 +10,7 @@ A complete product ready to launch as your own SaaS: branded website, trader das
 |------|------|
 | **Sales deck** | [zirvey.github.io/Scalping-Bot-SaaS](https://zirvey.github.io/Scalping-Bot-SaaS/) |
 | **Product UI** | [/helix/](https://zirvey.github.io/Scalping-Bot-SaaS/helix/) |
-| **Bot demo** | [/demo/](https://zirvey.github.io/Scalping-Bot-SaaS/demo/) |
+| **Bot demo** | [/demo/](https://zirvey.github.io/Scalping-Bot-SaaS/demo/) — sidebar trader cabinet (dashboard, trades, backtest, console) |
 
 ## Track record
 

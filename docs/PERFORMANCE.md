@@ -18,35 +18,34 @@
 
 | Direction | Trades | PnL | WR |
 |-----------|--------|-----|-----|
-| **UP** | 377 | **+$115.55** | 76% |
-| DOWN | 55 | −$10.10 | 69% |
+| **UP** | 984 | **+$312.50** | 74.0% |
+| DOWN | 648 | +$220.65 | 75.6% |
 
-UP is the main profit driver. DOWN is limited by a separate time window (≤120s).
+UP contributes the largest share of total PnL. DOWN uses a separate time window (≤120s).
 
 ## By asset
 
 | Asset | Trades | PnL | WR |
 |-------|--------|-----|-----|
-| BTC | 97 | +$41.34 | 75% |
-| ETH | 147 | +$30.81 | 75% |
-| SOL | 188 | +$33.30 | 75% |
+| BTC | 468 | +$172.69 | 76.9% |
+| ETH | 555 | +$155.45 | 73.3% |
+| SOL | 609 | +$205.00 | 74.1% |
 
-*Asset PnL sums to total: $41.34 + $30.81 + $33.30 = **$105.45***
+*Asset PnL sums to total: $172.69 + $155.45 + $205.00 = **$533.14***
 
 ## By exit type
 
-| Exit type | Count | PnL | WR |
-|-----------|-------|-----|-----|
-| **take_profit** | 234 | **+$251.00** | 100% |
-| trailing_take_profit | 48 | +$16.00 | 67% |
-| manual_web | 6 | +$3.45 | 100% |
-| ev_exit | 52 | −$42.00 | 38% |
-| deep_drawdown_cut | 38 | −$55.00 | 0% |
-| momentum_cut | 28 | −$24.00 | 0% |
-| thesis_exit | 12 | −$30.00 | 0% |
-| outcomePrices | 14 | −$14.00 | 14% |
-
-*Exit PnL sums to total: +$270.45 gross wins − $165.00 gross losses = **+$105.45***
+| Exit type | Count | PnL |
+|-----------|-------|-----|
+| **take_profit** | 884 | **+$418.88** |
+| trailing_take_profit | 191 | +$93.02 |
+| ev_exit | 211 | +$27.50 |
+| momentum_cut | 117 | +$17.47 |
+| deep_drawdown_cut | 119 | +$4.09 |
+| manual_web | 5 | +$2.67 |
+| thesis_exit | 95 | −$1.42 |
+| outcomePrices | 3 | −$11.02 |
+| midpoint | 7 | −$18.04 |
 
 **Conclusion:** take_profit generates most profit. Exit policy caps tail losses.
 
@@ -70,10 +69,9 @@ UP is the main profit driver. DOWN is limited by a separate time window (≤120s
 
 | Metric | Value |
 |--------|-------|
-| Total signals | 1,247 |
-| Passed EV gate | 432 |
-| Pass rate | 34.6% |
-| Strict replay | ~17% |
+| Total signals | ~4,200 |
+| Passed EV gate | ~1,632 |
+| Pass rate | ~39% |
 
 ## Charts
 

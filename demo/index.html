@@ -3,297 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Helix Trade — Bot Dashboard Demo</title>
-  <meta name="description" content="Interactive Helix Trade trader cabinet demo — Polymarket 5m scalping bot simulation." />
+  <title>Helix Trade — Dashboard Demo</title>
+  <meta name="description" content="Helix Trade trader cabinet demo — Polymarket 5m scalping bot simulation." />
+  <link rel="icon" href="../assets/helix.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/demo.css" />
 </head>
 <body>
-  <div class="demo-app">
-    <div class="demo-banner">
-      🎭 <strong>Demo mode</strong> — simulated bot panel. For live UI see <a href="../helix/">Helix Trade</a>.
-      <a href="../index.html">← Sales deck</a>
-    </div>
-
-    <header class="topbar">
-      <span class="logo">Helix Trade</span>
-      <nav class="tabs">
-        <button class="active" data-tab="dashboard">Dashboard</button>
-        <button data-tab="backtest">Backtest</button>
-        <button data-tab="console">Console</button>
-        <button data-tab="settings">Settings</button>
-        <button data-tab="trades">Trades</button>
-      </nav>
-      <div class="spacer"></div>
-      <span class="nautilus-pill dim" id="nautilus-pill">slot 3:07 left · subs 6 · inst 3 · grp 3</span>
-      <span class="status-pill">
-        <span class="dot on" id="status-dot"></span>
-        <span id="status-text">Running 1h 4m</span>
-        <span class="dim">nautilus</span>
-      </span>
-      <button class="btn" id="btn-restart">Restart</button>
-      <button class="btn danger" id="btn-stop">Stop</button>
-      <button class="btn green" id="btn-start" style="display:none">Start</button>
-    </header>
-
-    <div class="open-pos-bar" id="open-pos-bar">
-      <div class="open-pos-bar-label">
-        Open positions: <strong>1</strong>
-      </div>
-      <div class="open-pos-cards">
-        <div class="pos-card pos-up">
-          <div class="pos-card-head">
-            <span class="pos-asset" id="pos-card-asset">BTC</span>
-            <span class="badge up" id="pos-card-dir">UP</span>
-            <span class="dim" style="font-size:10px;margin-left:auto">paper</span>
-          </div>
-          <div class="dim" style="font-size:13px">
-            Entry <strong id="pos-card-entry">0.412</strong> ·
-            Stake <strong id="pos-card-stake">$1.50</strong> ·
-            Edge <strong class="green-text" id="pos-card-edge">+0.073</strong> ·
-            <span id="pos-card-time">87s</span> to expiry
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <main class="page">
-      <div class="tab-panel active" id="tab-dashboard">
-        <div class="cards">
-          <div class="card">
-            <div class="label">Mode</div>
-            <div class="value" id="val-mode">PAPER</div>
-            <div class="sub" id="sub-mode">Nautilus · auto-trade on</div>
-          </div>
-          <div class="card">
-            <div class="label">Balance</div>
-            <div class="value" id="val-balance">$533.14</div>
-            <div class="sub" id="sub-balance">virtual</div>
-          </div>
-          <div class="card">
-            <div class="label">Daily PnL</div>
-            <div class="value green-text" id="val-daily">+$1.24</div>
-            <div class="sub" id="sub-daily">4W / 1L</div>
-          </div>
-          <div class="card">
-            <div class="label">Open positions</div>
-            <div class="value" id="val-open">1</div>
-            <div class="sub" id="sub-open">streak: 2W / 0L</div>
-          </div>
-          <div class="card">
-            <div class="label">All-time</div>
-            <div class="value green-text" id="val-total">+$533.14</div>
-            <div class="sub" id="sub-total">1632 trades, win rate 74.6% (1218W / 414L)</div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Open positions (1)</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Asset</th><th>Direction</th><th>Entry</th><th>Stake</th>
-                <th>p_est</th><th>edge</th><th>move</th><th>Time left</th><th>Signal</th><th>Market</th>
-              </tr>
-            </thead>
-            <tbody id="positions-tbody"></tbody>
-          </table>
-        </div>
-
-        <div class="panel">
-          <h3>Signal funnel (session)</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Signals found</th><th>Rejected by filters</th>
-                <th>Entry attempts</th><th>Entries filled</th><th>Exits</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="f-found">142</td>
-                <td id="f-rejected">118</td>
-                <td id="f-attempted">8</td>
-                <td id="f-filled">6</td>
-                <td id="f-exits">5</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="dim" style="margin-top:10px;font-size:12px">
-            Top reject reasons: edge_too_low: 48 · time_window: 31 · spread_wide: 22 · binance_confirm: 17
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Recent trades</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th><th>Asset</th><th>Direction</th><th>Entry</th>
-                <th>Stake</th><th>PnL</th><th>Result</th><th>Source</th>
-              </tr>
-            </thead>
-            <tbody id="trades-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="tab-backtest">
-        <div class="bt-hero">
-          <h2 style="margin:0 0 8px;font-size:18px">Exit-sim backtest</h2>
-          <p class="dim" style="margin:0;font-size:13px;max-width:640px">
-            Exit policy simulation on 1632 historical entries from trade journal.
-            Comparison: actual vs new rules.
-          </p>
-        </div>
-
-        <div class="bt-verdict">
-          <strong class="green-text">Verdict:</strong> new exit policy (DD cut 0.26) improves PnL by <strong>+$8.85</strong>
-          on the same entry set. Take profit remains the main driver (+$251).
-        </div>
-
-        <div class="panel">
-          <h3>EV gate (replay)</h3>
-          <p class="dim" style="font-size:13px;margin:0 0 14px">How many signals would pass filters on historical data</p>
-          <div class="bt-gate-stats">
-            <div><span class="dim">Total signals</span><div class="bt-gate-num">1,247</div></div>
-            <div><span class="dim">Passed EV gate</span><div class="bt-gate-num green-text">1632</div></div>
-            <div><span class="dim">Pass rate</span><div class="bt-gate-num">34.6%</div></div>
-            <div><span class="dim">Strict replay</span><div class="bt-gate-num">~17%</div></div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>PnL by asset</h3>
-          <div class="bt-asset-bars">
-            <div class="bt-asset-row">
-              <span class="bt-asset-name">BTC</span>
-              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:100%"></div></div>
-              <span class="green-text">+$41.34</span>
-              <span class="dim">97 · 75%</span>
-            </div>
-            <div class="bt-asset-row">
-              <span class="bt-asset-name">ETH</span>
-              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:75%"></div></div>
-              <span class="green-text">+$30.81</span>
-              <span class="dim">147 · 75%</span>
-            </div>
-            <div class="bt-asset-row">
-              <span class="bt-asset-name">SOL</span>
-              <div class="bt-asset-track"><div class="bt-asset-fill pos" style="width:80%"></div></div>
-              <span class="green-text">+$33.30</span>
-              <span class="dim">188 · 75%</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h3>Cumulative PnL</h3>
-          <svg class="bt-chart" viewBox="0 0 640 200" role="img">
-            <line x1="44" y1="40" x2="628" y2="40" class="bt-grid"/>
-            <line x1="44" y1="100" x2="628" y2="100" class="bt-grid"/>
-            <line x1="44" y1="160" x2="628" y2="160" class="bt-grid"/>
-            <line x1="44" y1="160" x2="628" y2="160" class="bt-zero"/>
-            <text x="38" y="44" text-anchor="end" class="bt-axis">$105</text>
-            <text x="38" y="104" text-anchor="end" class="bt-axis">$53</text>
-            <text x="38" y="164" text-anchor="end" class="bt-axis">$0</text>
-            <path class="bt-line actual" d="M44,160 L120,148 L200,142 L280,130 L360,118 L440,95 L520,72 L600,40"/>
-            <path class="bt-line sim" d="M44,160 L120,146 L200,138 L280,125 L360,110 L440,88 L520,65 L600,32"/>
-            <text x="44" y="192" class="bt-axis">1</text>
-            <text x="600" y="192" text-anchor="end" class="bt-axis">trade 432</text>
-          </svg>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="tab-console">
-        <div class="console-toolbar">
-          <span class="status-pill"><span class="dot on"></span> connected</span>
-          <button class="chip active">All</button>
-          <button class="chip">Orders</button>
-          <button class="chip">Scan</button>
-          <button class="chip">Filters</button>
-          <button class="chip">Settlement</button>
-        </div>
-        <div class="console" id="console-box"></div>
-      </div>
-
-      <div class="tab-panel" id="tab-settings">
-        <p class="dim" style="margin:0 0 18px;padding:12px 14px;background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;font-size:13px">
-          Demo: settings preview for buyers. Full product includes full strategy controls.
-        </p>
-
-        <details class="settings-group" open>
-          <summary>General</summary>
-          <div class="settings-fields">
-            <div class="field"><span>PAPER_TRADE</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
-            <div class="field"><span>AUTO_TRADE</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
-            <div class="field"><span>ASSETS</span><span class="dim">BTC, ETH, SOL</span></div>
-          </div>
-        </details>
-
-        <details class="settings-group" open>
-          <summary>Stakes & limits</summary>
-          <div class="settings-fields">
-            <div class="field"><span>STAKE_USD</span><span>1.50</span></div>
-            <div class="field"><span>MAX_OPEN_POSITIONS</span><span>3</span></div>
-            <div class="field"><span>MAX_TOTAL_EXPOSURE_USD</span><span>5.00</span></div>
-            <div class="field"><span>MAX_UP_PER_SLOT</span><span>1</span></div>
-          </div>
-        </details>
-
-        <details class="settings-group">
-          <summary>EV gate</summary>
-          <div class="settings-fields">
-            <div class="field"><span>MIN_EDGE</span><span>0.07</span></div>
-            <div class="field"><span>MIN_SECONDS_LEFT</span><span>45</span></div>
-            <div class="field"><span>MAX_SECONDS_LEFT</span><span>180</span></div>
-            <div class="field"><span>STRICT_BINANCE_UP</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
-          </div>
-        </details>
-
-        <details class="settings-group">
-          <summary>Exit policy</summary>
-          <div class="settings-fields">
-            <div class="field"><span>TAKE_PROFIT_PCT</span><span>0.07</span></div>
-            <div class="field"><span>DEEP_DRAWDOWN_CUT</span><span>0.26</span></div>
-            <div class="field"><span>TRAILING_TP_ENABLED</span><label class="toggle"><input type="checkbox" checked><span class="slider"></span></label></div>
-            <div class="field"><span>MOMENTUM_CUT_ENABLED</span><label class="toggle"><input type="checkbox"><span class="slider"></span></label></div>
-          </div>
-        </details>
-      </div>
-
-      <div class="tab-panel" id="tab-trades">
-        <div class="panel">
-          <h3>Trade history</h3>
-          <p class="dim" style="font-size:12px;margin:0 0 12px">1632 closed trades · paper mix · win rate 74.6% (1218W / 414L)</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th><th>Asset</th><th>Direction</th><th>Entry</th>
-                <th>Stake</th><th>PnL</th><th>Result</th><th>Source</th>
-              </tr>
-            </thead>
-            <tbody id="trades-tbody-full"></tbody>
-          </table>
-        </div>
-
-        <div class="cards">
-          <div class="card"><div class="label">Total PnL</div><div class="value green-text">+$533.14</div></div>
-          <div class="card"><div class="label">Win Rate</div><div class="value">75%</div></div>
-          <div class="card"><div class="label">Best exit</div><div class="value green-text">take_profit</div><div class="sub">+$251 · 234 trades</div></div>
-        </div>
-      </div>
-    </main>
+  <div class="demo-banner">
+    Demo mode — simulated data. <a href="../helix/">Helix landing</a> · <a href="../index.html">Sales deck</a>
   </div>
 
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../assets/helix.svg" alt="" width="28" height="28" />
+        <span>Helix Trade</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-section">Trading</p>
+        <button type="button" class="nav-item active" data-tab="dashboard">Dashboard</button>
+        <button type="button" class="nav-item" data-tab="trades">Trades</button>
+        <button type="button" class="nav-item" data-tab="backtest">Backtest</button>
+        <button type="button" class="nav-item" data-tab="console">Console</button>
+
+        <p class="nav-section">Bot</p>
+        <button type="button" class="nav-item" data-tab="settings">Bot Settings</button>
+
+        <p class="nav-section">Account</p>
+        <button type="button" class="nav-item nav-item-muted" data-tab="wallet">Wallet & Keys</button>
+        <button type="button" class="nav-item nav-item-muted" data-tab="profile">Profile</button>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-card">
+          <p class="user-name">Demo User</p>
+          <p class="user-email">admin@helix.trade</p>
+          <span class="user-plan">Full access</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-col">
+      <header class="main-header">
+        <div>
+          <h1 class="page-title" id="page-title">Dashboard</h1>
+          <p class="page-sub">Paper mode · cloud bot · keys optional</p>
+        </div>
+        <div class="toolbar">
+          <span class="nautilus-pill dim" id="nautilus-pill">slot 3:07 left · subs 6</span>
+          <span class="status-pill">
+            <span class="dot on" id="status-dot"></span>
+            <span id="status-text">Running 1h 4m</span>
+          </span>
+          <button class="btn" id="btn-restart">Restart</button>
+          <button class="btn btn-danger" id="btn-stop">Stop</button>
+          <button class="btn btn-primary" id="btn-start" style="display:none">Start</button>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <div class="open-pos-bar" id="open-pos-bar">
+          <p class="open-pos-label">Open positions: <strong>1</strong></p>
+          <div class="pos-card pos-up">
+            <div class="pos-card-head">
+              <span class="pos-asset" id="pos-card-asset">BTC</span>
+              <span class="badge up" id="pos-card-dir">UP</span>
+              <span class="dim pos-paper">paper</span>
+            </div>
+            <p class="pos-meta dim">
+              Entry <strong id="pos-card-entry">0.412</strong> ·
+              Stake <strong id="pos-card-stake">$1.50</strong> ·
+              Edge <strong class="green-text" id="pos-card-edge">+0.073</strong> ·
+              <span id="pos-card-time">87s</span> left
+            </p>
+          </div>
+        </div>
+
+        <div class="tab-panel active" id="tab-dashboard">
+          <div class="quick-card">
+            <p class="quick-title">Quick start</p>
+            <p class="dim">Paper bot is running. Monitor funnel, positions, and recent fills below.</p>
+          </div>
+
+          <div class="cards">
+            <div class="stat-card">
+              <p class="label">Mode</p>
+              <p class="value" id="val-mode">PAPER</p>
+              <p class="sub" id="sub-mode">Nautilus · auto-trade on</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">Balance</p>
+              <p class="value" id="val-balance">$533.14</p>
+              <p class="sub" id="sub-balance">virtual</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">Daily PnL</p>
+              <p class="value green-text" id="val-daily">+$2.84</p>
+              <p class="sub" id="sub-daily">6W / 1L</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">Open positions</p>
+              <p class="value" id="val-open">1</p>
+              <p class="sub" id="sub-open">streak: 2W / 0L</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">All-time</p>
+              <p class="value green-text" id="val-total">+$533.14</p>
+              <p class="sub" id="sub-total">1632 trades · 74.6% WR</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Signal funnel (session)</h3>
+            <table>
+              <thead>
+                <tr><th>Found</th><th>Rejected</th><th>Attempts</th><th>Filled</th><th>Exits</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="f-found">142</td>
+                  <td id="f-rejected">118</td>
+                  <td id="f-attempted">8</td>
+                  <td id="f-filled">6</td>
+                  <td id="f-exits">5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel">
+            <h3>Open positions</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Asset</th><th>Dir</th><th>Entry</th><th>Stake</th>
+                    <th>p_est</th><th>edge</th><th>Left</th><th>Signal</th>
+                  </tr>
+                </thead>
+                <tbody id="positions-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Recent trades</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Time</th><th>Asset</th><th>Dir</th><th>Entry</th>
+                    <th>Stake</th><th>PnL</th><th>Result</th><th>Exit</th>
+                  </tr>
+                </thead>
+                <tbody id="trades-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-trades">
+          <div class="panel">
+            <h3>Trade history</h3>
+            <p class="dim panel-desc">1632 closed · paper · 74.6% WR (1218W / 414L)</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Time</th><th>Asset</th><th>Dir</th><th>Entry</th>
+                    <th>Stake</th><th>PnL</th><th>Result</th><th>Exit</th>
+                  </tr>
+                </thead>
+                <tbody id="trades-tbody-full"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="cards cards-3">
+            <div class="stat-card"><p class="label">Total PnL</p><p class="value green-text">+$533.14</p></div>
+            <div class="stat-card"><p class="label">Win rate</p><p class="value">74.6%</p></div>
+            <div class="stat-card"><p class="label">Best exit</p><p class="value green-text">take_profit</p><p class="sub">+$419 · 884 trades</p></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-backtest">
+          <div class="panel">
+            <h3>Exit-sim backtest</h3>
+            <p class="dim panel-desc">1632 historical entries · exit policy comparison</p>
+            <p class="verdict"><strong class="green-text">Verdict:</strong> take_profit remains primary driver (+$419 on 884 trades).</p>
+          </div>
+          <div class="panel">
+            <h3>PnL by asset</h3>
+            <div class="asset-bars">
+              <div class="asset-row"><span>BTC</span><div class="bar-track"><div class="bar-fill" style="width:84%"></div></div><span class="green-text">+$172.69</span><span class="dim">468 · 76.9%</span></div>
+              <div class="asset-row"><span>ETH</span><div class="bar-track"><div class="bar-fill" style="width:76%"></div></div><span class="green-text">+$155.45</span><span class="dim">555 · 73.3%</span></div>
+              <div class="asset-row"><span>SOL</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="green-text">+$205.00</span><span class="dim">609 · 74.1%</span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Cumulative PnL</h3>
+            <object type="image/svg+xml" data="../assets/screenshots/06-cumulative-pnl-real.svg" class="chart-object"></object>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-console">
+          <div class="console-toolbar">
+            <span class="status-pill"><span class="dot on"></span> connected</span>
+            <button type="button" class="chip active">All</button>
+            <button type="button" class="chip">Orders</button>
+            <button type="button" class="chip">Scan</button>
+            <button type="button" class="chip">Filters</button>
+          </div>
+          <div class="console" id="console-box"></div>
+        </div>
+
+        <div class="tab-panel" id="tab-settings">
+          <div class="panel">
+            <p class="dim panel-desc">Strategy parameters preview — full controls in source handoff.</p>
+          </div>
+          <details class="settings-group" open>
+            <summary>General</summary>
+            <div class="field"><span>PAPER_TRADE</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+            <div class="field"><span>AUTO_TRADE</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+            <div class="field"><span>ASSETS</span><span class="dim">BTC, ETH, SOL</span></div>
+          </details>
+          <details class="settings-group" open>
+            <summary>EV gate</summary>
+            <div class="field"><span>MIN_EDGE</span><span>0.07</span></div>
+            <div class="field"><span>ENTRY_SECONDS_LEFT_MAX</span><span>180</span></div>
+            <div class="field"><span>MAX_UP_PER_SLOT</span><span>1</span></div>
+          </details>
+          <details class="settings-group">
+            <summary>Exit policy</summary>
+            <div class="field"><span>TAKE_PROFIT_PCT</span><span>0.07</span></div>
+            <div class="field"><span>DEEP_DRAWDOWN_CUT</span><span>0.26</span></div>
+            <div class="field"><span>TRAILING_TP</span><label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label></div>
+          </details>
+        </div>
+
+        <div class="tab-panel" id="tab-wallet">
+          <div class="panel placeholder-panel">
+            <h3>Wallet & Keys</h3>
+            <p class="dim">Phase 3 — CLOB keys via desktop agent. Available in full product handoff.</p>
+            <a class="link-btn" href="../helix/">See Helix UI →</a>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-profile">
+          <div class="panel placeholder-panel">
+            <h3>Profile & subscription</h3>
+            <p class="dim">Full Access · $25/mo · paper trial included.</p>
+            <a class="link-btn" href="../helix/">See pricing →</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <nav class="mobile-nav">
+    <button type="button" class="mobile-nav-item active" data-tab="dashboard">Home</button>
+    <button type="button" class="mobile-nav-item" data-tab="trades">Trades</button>
+    <button type="button" class="mobile-nav-item" data-tab="console">Console</button>
+    <button type="button" class="mobile-nav-item" data-tab="settings">Settings</button>
+  </nav>
+
   <script src="../assets/js/demo.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        const src = document.getElementById("trades-tbody");
-        const dst = document.getElementById("trades-tbody-full");
-        if (src && dst) dst.innerHTML = src.innerHTML;
-      }, 50);
-    });
-  </script>
 </body>
 </html>

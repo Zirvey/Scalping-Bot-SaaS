@@ -1,6 +1,16 @@
 (function () {
   "use strict";
 
+  const PAGE_TITLES = {
+    dashboard: "Dashboard",
+    trades: "Trades",
+    backtest: "Backtest",
+    console: "Console",
+    settings: "Bot Settings",
+    wallet: "Wallet & Keys",
+    profile: "Profile",
+  };
+
   const DEMO_TRADES = [
     { time: "14:52:03", asset: "BTC", dir: "UP", entry: 0.412, stake: 1.5, pnl: 0.18, win: true, src: "take_profit" },
     { time: "14:47:11", asset: "ETH", dir: "DOWN", entry: 0.538, stake: 1.2, pnl: -0.22, win: false, src: "deep_drawdown_cut" },
@@ -24,7 +34,7 @@
     { cls: "warn", text: "[WARN] Binance confirm lag 340ms — within tolerance" },
     { cls: "settle", text: "[DEEP_DRAWDOWN] ETH DOWN cut @0.354 pnl=-$0.22" },
     { cls: "scan", text: "[SCAN] Funnel: found=142 rejected=118 attempted=8 filled=6" },
-    { cls: "settle", text: "[RESULT] Session PnL +$1.24 | 4W/1L | win rate 80%" },
+    { cls: "settle", text: "[RESULT] Session PnL +$2.84 | 6W/1L | win rate 85.7%" },
   ];
 
   let running = true;
@@ -42,6 +52,7 @@
   let funnel = { found: 142, rejected: 118, attempted: 8, filled: 6, exits: 5 };
   let logLines = [];
   let logIndex = 0;
+  let activeTab = "dashboard";
 
   const position = {
     asset: "BTC",
@@ -79,10 +90,8 @@
     return document.getElementById(id);
   }
 
-  function renderTrades() {
-    const tbody = el("trades-tbody");
-    if (!tbody) return;
-    tbody.innerHTML = DEMO_TRADES.map((t) => `
+  function tradeRow(t) {
+    return `
       <tr>
         <td class="dim">${t.time}</td>
         <td>${t.asset}</td>
@@ -92,8 +101,15 @@
         <td class="${t.pnl >= 0 ? "green-text" : "red-text"}">${fmtPnl(t.pnl)}</td>
         <td><span class="badge ${t.win ? "up" : "down"}">${t.win ? "WIN" : "LOSS"}</span></td>
         <td class="dim">${t.src}</td>
-      </tr>
-    `).join("");
+      </tr>`;
+  }
+
+  function renderTrades() {
+    const html = DEMO_TRADES.map(tradeRow).join("");
+    const tbody = el("trades-tbody");
+    const full = el("trades-tbody-full");
+    if (tbody) tbody.innerHTML = html;
+    if (full) full.innerHTML = html;
   }
 
   function renderPosition() {
@@ -101,7 +117,9 @@
     const tbody = el("positions-tbody");
     if (!running || !position) {
       if (bar) bar.style.display = "none";
-      if (tbody) tbody.innerHTML = `<tr><td colspan="10" class="dim">No open positions. Bot is scanning for positive-EV setups…</td></tr>`;
+      if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="8" class="dim">No open positions. Bot is scanning for positive-EV setups…</td></tr>`;
+      }
       return;
     }
     if (bar) {
@@ -117,16 +135,14 @@
     if (tbody) {
       tbody.innerHTML = `
         <tr>
-          <td>▼ ${position.asset}</td>
-          <td><span class="badge up">${position.dir}</span> <span class="dim" style="font-size:11px">paper</span></td>
+          <td>${position.asset}</td>
+          <td><span class="badge ${position.dir === "UP" ? "up" : "down"}">${position.dir}</span></td>
           <td>${position.entry.toFixed(3)}</td>
           <td>$${position.stake.toFixed(2)}</td>
           <td>${position.pEst.toFixed(3)}</td>
           <td class="green-text">+${position.edge.toFixed(3)}</td>
-          <td>+${(position.move * 100).toFixed(3)}%</td>
-          <td class="${position.secondsLeft < 30 ? "yellow-text" : ""}">${Math.round(position.secondsLeft)}s</td>
+          <td>${Math.round(position.secondsLeft)}s</td>
           <td class="dim">${position.signal}</td>
-          <td class="dim">${position.slug}</td>
         </tr>`;
     }
   }
@@ -142,8 +158,8 @@
     el("val-open").textContent = running ? "1" : "—";
     el("sub-open").textContent = running ? "streak: 2W / 0L" : "";
     el("val-total").textContent = fmtPnl(totalPnl);
-    el("val-total").className = `value green-text`;
-    el("sub-total").textContent = `${totalTrades} trades, win rate ${winrate}% (${wins}W / ${losses}L)`;
+    el("val-total").className = "value green-text";
+    el("sub-total").textContent = `${totalTrades} trades · ${winrate}% WR`;
 
     el("f-found").textContent = funnel.found;
     el("f-rejected").textContent = funnel.rejected;
@@ -153,11 +169,28 @@
 
     el("status-dot").className = `dot ${running ? "on" : "off"}`;
     el("status-text").textContent = running ? `Running ${fmtUptime(uptimeSec)}` : "Stopped";
-    el("nautilus-pill").textContent = `slot ${fmtSlot(slotSeconds)} · subs 6 · inst 3 · grp 3`;
+    el("nautilus-pill").textContent = `slot ${fmtSlot(slotSeconds)} · subs 6`;
 
     el("btn-start").style.display = running ? "none" : "inline-block";
     el("btn-stop").style.display = running ? "inline-block" : "none";
     el("btn-restart").style.display = running ? "inline-block" : "none";
+  }
+
+  function setTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll(".nav-item[data-tab]").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+    document.querySelectorAll(".mobile-nav-item[data-tab]").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+    document.querySelectorAll(".tab-panel").forEach((p) => {
+      p.classList.toggle("active", p.id === `tab-${tab}`);
+    });
+    const title = el("page-title");
+    if (title) title.textContent = PAGE_TITLES[tab] || "Helix Trade";
+    const bar = el("open-pos-bar");
+    if (bar) bar.style.display = tab === "dashboard" && running ? "block" : "none";
   }
 
   function addLogLine() {
@@ -190,12 +223,8 @@
   }
 
   function initTabs() {
-    document.querySelectorAll(".tabs button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tab = btn.dataset.tab;
-        document.querySelectorAll(".tabs button").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
-        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === `tab-${tab}`));
-      });
+    document.querySelectorAll("[data-tab]").forEach((btn) => {
+      btn.addEventListener("click", () => setTab(btn.dataset.tab));
     });
   }
 
@@ -204,6 +233,7 @@
       running = true;
       renderStats();
       renderPosition();
+      if (activeTab === "dashboard") el("open-pos-bar").style.display = "block";
     });
     el("btn-stop").addEventListener("click", () => {
       running = false;
@@ -232,6 +262,7 @@
     renderTrades();
     renderStats();
     renderPosition();
+    setTab("dashboard");
     for (let i = 0; i < 12; i++) addLogLine();
     setInterval(tick, 1000);
   });
