@@ -40,12 +40,12 @@ def svg_cumulative(m: dict) -> str:
     poly_str = " ".join(poly)
     zero_y = h - pad - (h - 2 * pad) * (0 - lo) / span
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">
-  <rect width="100%" height="100%" fill="#0b1220"/>
-  <text x="{pad}" y="28" fill="#e2e8f0" font-size="18" font-family="Inter,sans-serif" font-weight="700">Cumulative PnL — {n} trades</text>
-  <text x="{w-pad}" y="28" fill="#22c55e" font-size="16" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">+${total:.2f}</text>
-  <line x1="{pad}" y1="{zero_y:.1f}" x2="{w-pad}" y2="{zero_y:.1f}" stroke="#334155"/>
-  <polyline fill="none" stroke="#22c55e" stroke-width="2.5" points="{poly_str}"/>
-  <polygon fill="rgba(34,197,94,0.12)" points="{pad},{h-pad} {poly_str} {w-pad},{h-pad}"/>
+  <rect width="100%" height="100%" fill="#000000"/>
+  <text x="{pad}" y="28" fill="#ffffff" font-size="18" font-family="Inter,sans-serif" font-weight="700">Cumulative PnL — {n} trades</text>
+  <text x="{w-pad}" y="28" fill="#34d59a" font-size="16" font-family="Inter,sans-serif" text-anchor="end" font-weight="700">+${total:.2f}</text>
+  <line x1="{pad}" y1="{zero_y:.1f}" x2="{w-pad}" y2="{zero_y:.1f}" stroke="#303236"/>
+  <polyline fill="none" stroke="#34d59a" stroke-width="2.5" points="{poly_str}"/>
+  <polygon fill="rgba(52,213,154,0.12)" points="{pad},{h-pad} {poly_str} {w-pad},{h-pad}"/>
 </svg>"""
 
 
@@ -55,8 +55,8 @@ def svg_exits(m: dict) -> str:
     bar_h = 36
     max_abs = max(abs(x["pnl"]) for x in items) or 1
     lines = [
-        '<rect width="100%" height="100%" fill="#0b1220"/>',
-        f'<text x="{pad}" y="30" fill="#e2e8f0" font-size="18" font-family="Inter,sans-serif" font-weight="700">PnL by exit type</text>',
+        '<rect width="100%" height="100%" fill="#000000"/>',
+        f'<text x="{pad}" y="30" fill="#ffffff" font-size="18" font-family="Inter,sans-serif" font-weight="700">PnL by exit type</text>',
     ]
     y0 = 60
     label_w = 180
@@ -75,11 +75,11 @@ def svg_exits(m: dict) -> str:
             x = mid_x - bw
             anchor = "end"
             tx = mid_x - bw - 8
-        color = "#22c55e" if val >= 0 else "#ef4444"
-        lines.append(f'<text x="{pad}" y="{y+22}" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">{row["label"]}</text>')
+        color = "#34d59a" if val >= 0 else "#ff3621"
+        lines.append(f'<text x="{pad}" y="{y+22}" fill="#797d86" font-size="13" font-family="Inter,sans-serif">{row["label"]}</text>')
         lines.append(f'<rect x="{x:.1f}" y="{y}" width="{max(bw, 4):.1f}" height="{bar_h}" rx="6" fill="{color}"/>')
         lines.append(
-            f'<text x="{tx:.1f}" y="{y+22}" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="{anchor}">${val:+.0f}</text>'
+            f'<text x="{tx:.1f}" y="{y+22}" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="{anchor}">${val:+.0f}</text>'
         )
     return "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"900\" height=\"360\" viewBox=\"0 0 900 360\">\n" + "\n".join(lines) + "\n</svg>"
 

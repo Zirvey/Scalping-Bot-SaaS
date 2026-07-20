@@ -1,15 +1,15 @@
-# How EV Scalp Pro Works
+# How Helix Trade Works
 
 ## Market
 
-The bot trades **5-minute Polymarket binary markets**: "BTC/ETH/SOL Up or Down in the next 5 minutes." Short impulse windows where token price (0.01–0.99) reflects outcome probability.
+The bot trades **5-minute Polymarket binary markets**: BTC/ETH/SOL Up or Down. Short impulse windows where token price (0.01–0.99) reflects outcome probability.
 
 ## Architecture
 
 ```
-Browser (localhost:8000)
-    ↓
-FastAPI webapp
+Browser (Helix Trade — website/ :5173)
+    ↓ proxy
+FastAPI (webapp/ :8000)
     ↓
 run_node.py → EvScalpStrategy (Nautilus Trader)
     ↓

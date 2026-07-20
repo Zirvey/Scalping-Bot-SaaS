@@ -1,64 +1,98 @@
-# EV Scalp Pro — SaaS Presentation
+# Helix Trade — SaaS For Sale
 
-**Turnkey trading bot for Polymarket 5m markets (BTC / ETH / SOL Up/Down).**
+**Turnkey Polymarket 5m scalping platform (BTC / ETH / SOL Up/Down).**
 
-🌐 **Live demo:** [open interactive dashboard](demo/)
+🌐 **Live on GitHub Pages:**
+- [Sales deck](index.html) — `/`
+- [Helix Trade UI](helix/) — production React landing (static build)
+- [Bot dashboard demo](demo/) — interactive panel simulation
 
-## Quick start
-
-Locally:
+## Quick start (this repo)
 
 ```bash
-open index.html
-# or
 python3 -m http.server 8080
 # → http://127.0.0.1:8080
 ```
 
-**GitHub Pages:** landing page at `/`, demo dashboard at `/demo/`
+## Full stack demo (source repo)
 
-## Key metrics (verified from trade journal)
+The complete product lives in the main **Scalping bot** repository:
+
+```bash
+sh/start_web.sh              # FastAPI :8000
+cd website && npm run dev    # Helix UI :5173
+# Demo login: admin@helix.trade / admin
+
+sh/start_bot.sh              # Paper bot (optional)
+```
+
+| URL | What |
+|-----|------|
+| `:5173` | Helix landing + `/app` trader cabinet |
+| `:8000` | Bot API, legacy panel, WebSocket console |
+
+## Key metrics
 
 | Metric | Value |
 |--------|-------|
-| **Total PnL** | **+$105.45** |
-| **Win Rate** | **75%** (324W / 108L) |
-| **Trades** | 432 |
-| **Best exit** | take_profit +$251 (234 trades) |
-| **Assets** | BTC +$41.34 · ETH +$30.81 · SOL +$33.30 |
+| **Total PnL** | **+$533.14** |
+| **Win rate** | **74.6%** (1218W / 414L) |
+| **Trades** | **1632** |
+| **Take profit PnL** | +$419 (884 trades) |
+| **Assets** | BTC +$173 · ETH +$155 · SOL +$205 |
 
-> All figures from `assets/data/metrics.json` — charts rebuilt via `scripts/generate_charts.py`
+> Canonical numbers in `assets/data/metrics.json` — charts via `scripts/generate_charts.py`
 
-## Structure
+## What's included
 
 ```
-├── index.html              # Landing page / sales deck
-├── demo/index.html         # Interactive web dashboard demo
+├── index.html           # Sales deck (Neon / Helix branding)
+├── helix/               # Built Helix Trade React app (landing + auth)
+├── demo/                # Interactive bot dashboard simulation
 ├── assets/
-│   ├── data/metrics.json   # Canonical performance numbers
-│   ├── css/                # Landing and demo styles
-│   ├── js/demo.js          # Bot simulation
-│   └── screenshots/        # UI previews + charts
+│   ├── data/metrics.json
+│   ├── css/             # Landing + demo styles
+│   ├── js/demo.js       # Simulated bot data
+│   └── helix.svg
 ├── docs/
 │   ├── HOW_IT_WORKS.md
 │   └── PERFORMANCE.md
 └── scripts/generate_charts.py
 ```
 
-## Demo
+## Product stack
 
-The interactive dashboard mirrors the original bot UI:
-- **Dashboard** — balance, PnL, open positions, signal funnel
-- **Backtest** — exit-sim results on 432 trades
-- **Console** — live logs (simulated)
-- **Settings** — strategy parameters
-- **Trades** — trade history
+| Layer | Tech |
+|-------|------|
+| **Frontend** | React 19, Vite, Tailwind, Motion — `website/` |
+| **Backend** | FastAPI, trade journal, backtest API — `webapp/` |
+| **Bot** | Nautilus Trader, EV-gate, paper/live — `strategy/` |
+| **Markets** | Polymarket 5m Up/Down + Binance sidecar |
 
-Data is simulated; no real trading is performed.
+## Demos explained
+
+| Demo | Real data? | Notes |
+|------|------------|-------|
+| `helix/` | Static UI | Landing, pricing, login/register screens |
+| `demo/` | Simulated | Dashboard, backtest, console, trades |
+| Local `:5173` + `:8000` | Live API | Full trader cabinet with paper bot |
+
+## Sync metrics from bot
+
+From the main repo (with `trade_history.jsonl`):
+
+```bash
+python3 -c "
+from webapp.server.trades import compute_stats
+import json
+# … export to assets/data/metrics.json
+"
+python3 scripts/generate_charts.py
+```
 
 ## Contact
 
-_Add your email / Telegram for a demo and repository handoff._
+_Add email / Telegram for repository handoff and due diligence._
 
 ---
 

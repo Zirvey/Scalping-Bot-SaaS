@@ -3,49 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EV Scalp Pro — Polymarket 5m Trading Bot (SaaS)</title>
-  <meta name="description" content="Profitable automated scalping bot for Polymarket 5m BTC/ETH/SOL markets. +$105 PnL, 75% win rate, web dashboard, backtest, risk guards." />
+  <title>Helix Trade — Polymarket 5m Scalping Bot (For Sale)</title>
+  <meta name="description" content="Turnkey Helix Trade SaaS: EV-gated Polymarket 5m bot, React frontend, FastAPI + Nautilus runtime. +$533 PnL, 74.6% WR, 1632 trades." />
+  <link rel="icon" href="assets/helix.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <nav>
     <div class="container nav-inner">
-      <div class="logo">EV <span>Scalp</span> Pro</div>
+      <a class="logo" href="./">
+        <img src="assets/helix.svg" alt="" width="22" height="22" />
+        Helix <span>Trade</span>
+      </a>
       <div class="nav-links">
-        <a href="demo/">Demo</a>
+        <a href="helix/">Live UI</a>
+        <a href="demo/">Bot demo</a>
         <a href="#product">Product</a>
-        <a href="#how">How it works</a>
         <a href="#performance">Results</a>
         <a href="#screenshots">Screenshots</a>
-        <a href="#saas">SaaS</a>
+        <a href="#saas">Pricing</a>
       </div>
-      <span class="badge-profit">● Profitable bot</span>
+      <span class="badge-profit">● 1632 trades logged</span>
     </div>
   </nav>
 
   <header class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="badge-profit">Verified on 432 trades</span>
-        <h1>Automated scalping on Polymarket 5m</h1>
+        <span class="badge-profit">Verified paper + demo journal</span>
+        <h1>Polymarket scalping, engineered for edge</h1>
         <p class="lead">
-          Turnkey SaaS product: event-driven bot on Nautilus Trader, EV entry model,
-          multi-layer exit policy, web control panel, and built-in backtest.
-          <strong style="color:#22c55e">Historically profitable</strong> on paper and live mix.
+          Full-stack SaaS product for sale: <strong>Helix Trade</strong> marketing site + trader cabinet,
+          Nautilus EV-gate strategy, cloud paper mode, backtest tooling, and subscription-ready UX.
         </p>
         <div class="hero-stats">
-          <div class="stat"><div class="val">+$105.45</div><div class="lbl">Total PnL</div></div>
-          <div class="stat"><div class="val">75%</div><div class="lbl">Win Rate</div></div>
-          <div class="stat"><div class="val">432</div><div class="lbl">Trades logged</div></div>
+          <div class="stat"><div class="val">+$533</div><div class="lbl">Total PnL</div></div>
+          <div class="stat"><div class="val">74.6%</div><div class="lbl">Win rate</div></div>
+          <div class="stat"><div class="val">1632</div><div class="lbl">Trades</div></div>
         </div>
         <div class="cta-row">
-          <a class="btn btn-primary" href="demo/">Open demo dashboard</a>
-          <a class="btn btn-secondary" href="#saas">Buy / license</a>
-          <a class="btn btn-secondary" href="docs/HOW_IT_WORKS.md">Documentation</a>
+          <a class="btn btn-primary" href="helix/">Open Helix UI</a>
+          <a class="btn btn-secondary" href="demo/">Bot dashboard demo</a>
+          <a class="btn btn-ghost" href="#saas">License / buy</a>
         </div>
+        <p class="hero-note">Full trader cabinet (<code>/app</code>) requires local bot API — see README.</p>
       </div>
-      <div>
-        <a href="demo/"><img class="hero-shot" src="assets/screenshots/01-hero-dashboard.svg" alt="EV Scalp Pro dashboard — click for demo" /></a>
+      <div class="hero-preview">
+        <a class="preview-card" href="helix/">
+          <div class="preview-label">Helix Trade — production landing</div>
+          <div class="preview-frame">
+            <iframe src="helix/" title="Helix Trade landing preview" loading="lazy"></iframe>
+          </div>
+          <span class="preview-cta">Open full screen →</span>
+        </a>
       </div>
     </div>
   </header>
@@ -53,37 +63,37 @@
   <section id="product">
     <div class="container">
       <h2 class="section-title">What you get</h2>
-      <p class="section-sub">Not a quick script — a full trading system with UI, risk management, and optimization tooling.</p>
+      <p class="section-sub">Not a script — a deployable SaaS stack with modern frontend, bot runtime, and analytics.</p>
       <div class="grid-3">
         <div class="card">
           <div class="icon">⚡</div>
-          <h3>Event-driven runtime</h3>
-          <p>Nautilus Trader: Polymarket CLOB WebSocket quotes, book deltas, debounced scan loop. Minimal market reaction latency.</p>
+          <h3>Helix Trade frontend</h3>
+          <p>React 19 + Vite + Tailwind. Neon design system, landing, auth, pricing, trader cabinet with motion and mobile nav.</p>
         </div>
         <div class="card">
           <div class="icon">🧠</div>
           <h3>Calibrated EV gate</h3>
-          <p>Entries only when estimated probability (Binance klines + probability table) exceeds token price with edge margin. Data-driven, not guesswork.</p>
+          <p>Entries when estimated P(UP) from Binance + probability table exceeds token price with configurable edge margin.</p>
         </div>
         <div class="card">
           <div class="icon">🛡️</div>
           <h3>Risk guards</h3>
-          <p>Exposure cap, max UP/slot, daily stop, loss streak pause, pre-trade checks. Protection from clustered losses on correlated assets.</p>
+          <p>Exposure caps, max UP per 5m slot, daily stop, loss-streak pause, dedup and suppression cooldowns.</p>
         </div>
         <div class="card">
           <div class="icon">📈</div>
           <h3>Exit policy</h3>
-          <p>Take profit (+$251 historically), trailing TP, deep drawdown cut, EV-exit, thesis exit. Optimized via backtest on real entries.</p>
+          <p>Take profit, trailing TP, deep drawdown cut, EV-exit, thesis exit — tuned via replay on real entries.</p>
         </div>
         <div class="card">
           <div class="icon">🖥️</div>
-          <h3>Web dashboard</h3>
-          <p>Dashboard, trades, console, settings, backtest — FastAPI + React. Start/stop bot from browser, live reject funnel stats.</p>
+          <h3>FastAPI control plane</h3>
+          <p>Start/stop bot, live status, trade journal, stats, backtest API, settings — proxied by the React app.</p>
         </div>
         <div class="card">
           <div class="icon">🔬</div>
-          <h3>Backtest tooling</h3>
-          <p>Fast/full replay, exit-sim, A/B entry and exit profiles. Live parity: MAX_UP_PER_SLOT, real Binance move in simulation.</p>
+          <h3>Backtest suite</h3>
+          <p>Fast/full replay, Nautilus BacktestEngine, exit-sim, entry A/B scripts, historical slug scanner.</p>
         </div>
       </div>
     </div>
@@ -91,183 +101,141 @@
 
   <section id="how">
     <div class="container">
-      <h2 class="section-title">How the bot works</h2>
-      <p class="section-sub">Trades 5-minute Polymarket binary markets: BTC / ETH / SOL Up or Down.</p>
-
+      <h2 class="section-title">Architecture</h2>
+      <p class="section-sub">Browser → Helix Trade (<code>website/</code>) → FastAPI (<code>webapp/</code>) → Nautilus → Polymarket CLOB + Binance.</p>
       <div class="flow">
-        <span class="flow-step">1. Quote/Book tick</span>
+        <span class="flow-step">Quote tick</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">2. Market context</span>
+        <span class="flow-step">Market context</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">3. EV gate</span>
+        <span class="flow-step">EV gate</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">4. Risk guards</span>
+        <span class="flow-step">Risk guards</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">5. Entry</span>
+        <span class="flow-step">Paper / live entry</span>
         <span class="flow-arrow">→</span>
-        <span class="flow-step">6. Exit policy</span>
+        <span class="flow-step">Exit policy</span>
       </div>
-
       <div class="grid-2">
         <div class="card">
-          <h3>Entry logic (EV gate)</h3>
+          <h3>Phase 1 — Cloud paper</h3>
           <ul>
-            <li><code>edge = p_estimated − token_price</code> from calibrated table</li>
-            <li>Time window: 45–180s to expiry (DOWN ≤120s)</li>
-            <li>Filters: spread, depth, book quality, Binance confirm</li>
-            <li>Price caps and MAX_UP_PER_SLOT = 1 per 5m slot</li>
-            <li>Strict selection: ~10–17% of signals pass replay filters</li>
+            <li>Free paper trial, no wallet keys</li>
+            <li>Virtual balance + JSONL trade journal</li>
+            <li>Dashboard, trades, console, settings</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Exit logic</h3>
+          <h3>Phase 2–3 — SaaS growth</h3>
           <ul>
-            <li><strong>take_profit</strong> — main profit driver (+$251, 100% WR on TP)</li>
-            <li><strong>trailing_take_profit</strong> — lock in on pullback from peak</li>
-            <li><strong>deep_drawdown_cut</strong> — stop at deep drawdown (0.26)</li>
-            <li><strong>ev_exit</strong> — exit when live model edge turns negative</li>
-            <li>momentum_cut disabled (0% WR historically)</li>
+            <li>$25/mo Full Access subscription UX (built-in)</li>
+            <li>Backtest tab + performance analytics</li>
+            <li>Wallet / CLOB keys via desktop agent (roadmap)</li>
           </ul>
         </div>
-      </div>
-
-      <div class="shot-block" style="margin-top:36px">
-        <h3>System architecture</h3>
-        <img src="assets/screenshots/03-architecture.svg" alt="EV Scalp Pro architecture" />
-        <p class="shot-caption">Browser → FastAPI → Nautilus Strategy → Polymarket CLOB + Binance sidecar → trade journal</p>
       </div>
     </div>
   </section>
 
   <section id="performance">
     <div class="container">
-      <h2 class="section-title">Why the bot is profitable</h2>
-      <p class="section-sub">Real numbers from <code>trade_history.jsonl</code> (paper + live mix, 432 closed trades).</p>
-
+      <h2 class="section-title">Track record</h2>
+      <p class="section-sub">From trade journal — 1632 closed paper trades (includes demo seed for presentation).</p>
       <div class="grid-3" style="margin-bottom:32px">
-        <div class="card"><h3>BTC</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$41.34</p><p>97 trades · WR 75%</p></div>
-        <div class="card"><h3>ETH</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$30.81</p><p>147 trades · WR 75%</p></div>
-        <div class="card"><h3>SOL</h3><p style="font-size:1.4rem;color:#22c55e;font-weight:800">+$33.30</p><p>188 trades · WR 75%</p></div>
+        <div class="card"><h3>BTC</h3><p class="metric-val">+$172.69</p><p>468 trades · 76.9% WR</p></div>
+        <div class="card"><h3>ETH</h3><p class="metric-val">+$155.45</p><p>555 trades · 73.3% WR</p></div>
+        <div class="card"><h3>SOL</h3><p class="metric-val">+$205.00</p><p>609 trades · 74.1% WR</p></div>
       </div>
-
       <div class="grid-2">
         <div class="shot-block">
-          <img src="assets/screenshots/04-performance.svg" alt="Performance analytics" />
+          <object type="image/svg+xml" data="assets/screenshots/06-cumulative-pnl-real.svg"></object>
+          <p class="shot-caption">Cumulative PnL</p>
         </div>
         <div class="shot-block">
-          <object type="image/svg+xml" data="assets/screenshots/06-cumulative-pnl-real.svg" style="width:100%;border-radius:14px;border:1px solid #1e293b"></object>
-          <p class="shot-caption">Cumulative PnL from trade journal</p>
+          <object type="image/svg+xml" data="assets/screenshots/07-exit-pnl-real.svg"></object>
+          <p class="shot-caption">PnL by exit type — take_profit +$419</p>
         </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:24px">
-        <div class="card">
-          <h3>Main profit driver</h3>
-          <p><strong style="color:#22c55e">take_profit: +$251</strong> on 234 trades (100% WR). The bot captures short 5m impulses — no holding for luck.</p>
-        </div>
-        <div class="card">
-          <h3>Loss control</h3>
-          <p>deep_drawdown (−$55) and ev_exit (−$42) are capped by exit policy. A/B backtest showed +$8.85 improvement at DD threshold 0.26 vs 0.22.</p>
-        </div>
-      </div>
-
-      <div class="shot-block" style="margin-top:24px">
-        <object type="image/svg+xml" data="assets/screenshots/07-exit-pnl-real.svg" style="width:100%;max-width:900px;border-radius:14px;border:1px solid #1e293b"></object>
-        <p class="shot-caption">PnL by exit type — from trade journal</p>
       </div>
     </div>
   </section>
 
   <section id="screenshots">
     <div class="container">
-      <h2 class="section-title">Product screenshots</h2>
-      <p class="section-sub">Web dashboard, backtest, settings, and analytics — all included.</p>
-
-      <div class="shot-block">
-        <h3>Dashboard — live status, balance, positions</h3>
-        <a href="demo/"><img src="assets/screenshots/01-hero-dashboard.svg" alt="Dashboard" /></a>
+      <h2 class="section-title">Live product preview</h2>
+      <p class="section-sub">Static Helix landing ships in <code>helix/</code>. Interactive bot panel in <code>demo/</code>.</p>
+      <div class="grid-2">
+        <a class="card link-card" href="helix/">
+          <h3>Helix Trade — Landing & auth</h3>
+          <p>Neon hero, pricing, roadmap, register/login flows. Production React build.</p>
+          <span class="link-arrow">Open helix/ →</span>
+        </a>
+        <a class="card link-card" href="demo/">
+          <h3>Trader cabinet simulation</h3>
+          <p>Dashboard, backtest, console, settings, trades — mirrors FastAPI panel UX with simulated data.</p>
+          <span class="link-arrow">Open demo/ →</span>
+        </a>
       </div>
-      <div class="shot-block">
-        <h3>Backtest — exit policy comparison</h3>
-        <img src="assets/screenshots/02-backtest.svg" alt="Backtest" />
-      </div>
-      <div class="shot-block">
-        <h3>Settings — 50+ strategy parameters</h3>
-        <img src="assets/screenshots/05-settings.svg" alt="Settings" />
+      <div class="card code-block" style="margin-top:24px">
+        <h3>Run full stack locally</h3>
+        <pre><code>sh/start_web.sh          # FastAPI :8000
+cd website && npm run dev  # Helix UI :5173
+# Login: admin@helix.trade / admin
+sh/start_bot.sh            # Paper bot (optional)</code></pre>
       </div>
     </div>
   </section>
 
   <section id="saas" class="pricing">
     <div class="container">
-      <h2 class="section-title">SaaS / White-label</h2>
-      <p class="section-sub">Ready to sell as self-hosted SaaS or code license + support.</p>
-
+      <h2 class="section-title">Licensing options</h2>
+      <p class="section-sub">Sell as SaaS, white-label, or full source handoff.</p>
       <div class="grid-3">
         <div class="card price-card">
-          <h3>Starter</h3>
-          <div class="price">Self-hosted</div>
-          <ul style="text-align:left;margin-top:16px">
-            <li>Full source code</li>
-            <li>Web dashboard + docs</li>
-            <li>Paper trading out of the box</li>
-            <li>Backtest tooling</li>
+          <h3>Source license</h3>
+          <div class="price">Full repo</div>
+          <ul>
+            <li>Bot + Helix frontend + FastAPI</li>
+            <li>Backtest & replay tooling</li>
+            <li>Design system + docs</li>
+            <li>Paper mode out of the box</li>
           </ul>
         </div>
         <div class="card price-card featured">
-          <h3>Pro</h3>
-          <div class="price">SaaS-ready</div>
-          <ul style="text-align:left;margin-top:16px">
-            <li>Everything in Starter</li>
-            <li>Live trading (CLOB V2)</li>
-            <li>Calibrated EV model</li>
-            <li>Optimized exit rules</li>
-            <li>Risk guards + slot limits</li>
+          <h3>SaaS-ready</h3>
+          <div class="price">$25/mo UX</div>
+          <ul>
+            <li>Subscription flows built-in</li>
+            <li>Cloud paper Phase 1 live</li>
+            <li>Trader journal + stats API</li>
+            <li>Calibrated EV + exit policy</li>
           </ul>
         </div>
         <div class="card price-card">
           <h3>Enterprise</h3>
           <div class="price">Custom</div>
-          <ul style="text-align:left;margin-top:16px">
-            <li>White-label UI</li>
+          <ul>
+            <li>White-label Helix UI</li>
             <li>Multi-tenant deployment</li>
             <li>Strategy customization</li>
-            <li>Priority support</li>
+            <li>Priority support & handoff</li>
           </ul>
         </div>
       </div>
-
-      <div class="card" style="margin-top:28px;text-align:center">
-        <h3>Try the demo</h3>
-        <p style="margin-top:12px">
-          Interactive web dashboard with trading simulation — dashboard, console, backtest, settings.
+      <div class="card cta-card">
+        <h3>Try before you buy</h3>
+        <p>
+          <a class="btn btn-primary" href="helix/">Helix landing</a>
+          <a class="btn btn-secondary" href="demo/">Bot demo</a>
         </p>
-        <p style="margin-top:16px">
-          <a class="btn btn-primary" href="demo/" style="display:inline-flex">Open live demo →</a>
-        </p>
-      </div>
-
-      <div class="card" style="margin-top:28px;text-align:center">
-        <h3>Key benefits for buyers</h3>
-        <p style="margin-top:12px">
-          ✅ Profitable track record (+$105 on $1–2 stake) &nbsp;·&nbsp;
-          ✅ Not a black box — full code and backtest &nbsp;·&nbsp;
-          ✅ Nautilus Trader (production-grade) &nbsp;·&nbsp;
-          ✅ Polymarket 5m — growing segment &nbsp;·&nbsp;
-          ✅ Ready-made web dashboard
-        </p>
-        <p style="margin-top:16px;color:#94a3b8">Contact for demo and due diligence: add your email / Telegram in README</p>
+        <p class="muted" style="margin-top:16px">Contact for repository access and due diligence.</p>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p><strong>EV Scalp Pro</strong> — Polymarket 5m Scalping Bot · Python 3.11+ · Nautilus Trader · FastAPI</p>
-      <p class="disclaimer">
-        Disclaimer: past performance does not guarantee future profits. Trading on prediction markets involves risk.
-        PnL figures from project trade_history.jsonl (432 trades, paper+live mix). Not financial advice.
-      </p>
+      <p><strong>Helix Trade</strong> · Polymarket 5m scalping · Python 3.11+ · Nautilus Trader · React + FastAPI</p>
+      <p class="disclaimer">Past performance does not guarantee future results. Not financial advice.</p>
     </div>
   </footer>
 </body>

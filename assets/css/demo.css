@@ -1,15 +1,15 @@
 :root {
-  --bg: #0d1117;
-  --bg-panel: #161b22;
-  --bg-hover: #1f2630;
-  --border: #2d333b;
-  --text: #e6edf3;
-  --text-dim: #8b949e;
-  --accent: #58a6ff;
-  --green: #3fb950;
-  --red: #f85149;
-  --yellow: #d29922;
-  --radius: 10px;
+  --bg: #000000;
+  --bg-panel: #151617;
+  --bg-hover: #242628;
+  --border: #303236;
+  --text: #ffffff;
+  --text-dim: #797d86;
+  --accent: #34d59a;
+  --green: #34d59a;
+  --red: #ff3621;
+  --yellow: #34d59a;
+  --radius: 4px;
   font-size: 14px;
 }
 

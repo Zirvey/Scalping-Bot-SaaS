@@ -1,7 +1,7 @@
-# Performance Report — EV Scalp Pro
+# Performance Report — Helix Trade
 
-**Date:** 2026-07-07  
-**Source:** `trade_history.jsonl` (432 closed trades, paper + live mix)
+**Updated:** 2026-07-20  
+**Source:** trade journal (1632 closed paper trades)
 
 > Canonical metrics: `assets/data/metrics.json`
 
@@ -9,10 +9,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Total PnL | **+$105.45** |
-| Win Rate | **75%** (324W / 108L) |
-| Trades | 432 |
-| Avg stake | ~$1–2 |
+| Total PnL | **+$533.14** |
+| Win Rate | **74.6%** (1218W / 414L) |
+| Trades | 1632 |
+| Avg stake | ~$3–4 |
 
 ## By direction
 

@@ -29,15 +29,15 @@
 
   let running = true;
   let uptimeSec = 3847;
-  let balance = 102.34;
-  let dailyPnl = 1.24;
-  let dailyW = 4;
+  let balance = 533.14;
+  let dailyPnl = 2.84;
+  let dailyW = 6;
   let dailyL = 1;
-  let totalPnl = 105.45;
-  let totalTrades = 432;
-  let winrate = 75;
-  let wins = 324;
-  let losses = 108;
+  let totalPnl = 533.14;
+  let totalTrades = 1632;
+  let winrate = 74.6;
+  let wins = 1218;
+  let losses = 414;
   let slotSeconds = 187;
   let funnel = { found: 142, rejected: 118, attempted: 8, filled: 6, exits: 5 };
   let logLines = [];

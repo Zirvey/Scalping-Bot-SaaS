@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360">
-<rect width="100%" height="100%" fill="#0b1220"/>
-<text x="40" y="30" fill="#e2e8f0" font-size="18" font-family="Inter,sans-serif" font-weight="700">PnL by exit type</text>
-<text x="40" y="82" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">take profit</text>
-<rect x="500.0" y="60" width="280.0" height="36" rx="6" fill="#22c55e"/>
-<text x="788.0" y="82" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+251</text>
-<text x="40" y="132" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">deep drawdown cut</text>
-<rect x="438.6" y="110" width="61.4" height="36" rx="6" fill="#ef4444"/>
-<text x="430.6" y="132" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-55</text>
-<text x="40" y="182" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">ev exit</text>
-<rect x="453.1" y="160" width="46.9" height="36" rx="6" fill="#ef4444"/>
-<text x="445.1" y="182" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-42</text>
-<text x="40" y="232" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">thesis exit</text>
-<rect x="466.5" y="210" width="33.5" height="36" rx="6" fill="#ef4444"/>
-<text x="458.5" y="232" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-30</text>
-<text x="40" y="282" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">momentum cut</text>
-<rect x="473.2" y="260" width="26.8" height="36" rx="6" fill="#ef4444"/>
-<text x="465.2" y="282" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-24</text>
-<text x="40" y="332" fill="#94a3b8" font-size="13" font-family="Inter,sans-serif">trailing take profit</text>
-<rect x="500.0" y="310" width="17.8" height="36" rx="6" fill="#22c55e"/>
-<text x="525.8" y="332" fill="#e2e8f0" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+16</text>
+<rect width="100%" height="100%" fill="#000000"/>
+<text x="40" y="30" fill="#ffffff" font-size="18" font-family="Inter,sans-serif" font-weight="700">PnL by exit type</text>
+<text x="40" y="82" fill="#797d86" font-size="13" font-family="Inter,sans-serif">take profit</text>
+<rect x="500.0" y="60" width="280.0" height="36" rx="6" fill="#34d59a"/>
+<text x="788.0" y="82" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+419</text>
+<text x="40" y="132" fill="#797d86" font-size="13" font-family="Inter,sans-serif">trailing take profit</text>
+<rect x="500.0" y="110" width="62.2" height="36" rx="6" fill="#34d59a"/>
+<text x="570.2" y="132" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+93</text>
+<text x="40" y="182" fill="#797d86" font-size="13" font-family="Inter,sans-serif">ev exit</text>
+<rect x="500.0" y="160" width="18.4" height="36" rx="6" fill="#34d59a"/>
+<text x="526.4" y="182" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+28</text>
+<text x="40" y="232" fill="#797d86" font-size="13" font-family="Inter,sans-serif">midpoint</text>
+<rect x="487.9" y="210" width="12.1" height="36" rx="6" fill="#ff3621"/>
+<text x="479.9" y="232" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-18</text>
+<text x="40" y="282" fill="#797d86" font-size="13" font-family="Inter,sans-serif">momentum cut</text>
+<rect x="500.0" y="260" width="11.7" height="36" rx="6" fill="#34d59a"/>
+<text x="519.7" y="282" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="start">$+17</text>
+<text x="40" y="332" fill="#797d86" font-size="13" font-family="Inter,sans-serif">outcomePrices</text>
+<rect x="492.6" y="310" width="7.4" height="36" rx="6" fill="#ff3621"/>
+<text x="484.6" y="332" fill="#ffffff" font-size="12" font-family="Inter,sans-serif" text-anchor="end">$-11</text>
 </svg>

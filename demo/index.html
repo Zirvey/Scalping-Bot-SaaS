@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Polymarket Bot — Live Demo</title>
-  <meta name="description" content="Interactive EV Scalp Pro web dashboard demo — scalping bot for Polymarket 5m markets." />
+  <title>Helix Trade — Bot Dashboard Demo</title>
+  <meta name="description" content="Interactive Helix Trade trader cabinet demo — Polymarket 5m scalping bot simulation." />
   <link rel="stylesheet" href="../assets/css/demo.css" />
 </head>
 <body>
   <div class="demo-app">
     <div class="demo-banner">
-      🎭 <strong>Demo mode</strong> — bot simulation with test data. No real trading is performed.
-      <a href="../index.html">← Back to landing</a>
+      🎭 <strong>Demo mode</strong> — simulated bot panel. For live UI see <a href="../helix/">Helix Trade</a>.
+      <a href="../index.html">← Sales deck</a>
     </div>
 
     <header class="topbar">
-      <span class="logo">Polymarket Bot</span>
+      <span class="logo">Helix Trade</span>
       <nav class="tabs">
         <button class="active" data-tab="dashboard">Dashboard</button>
         <button data-tab="backtest">Backtest</button>
@@ -66,7 +66,7 @@
           </div>
           <div class="card">
             <div class="label">Balance</div>
-            <div class="value" id="val-balance">$102.34</div>
+            <div class="value" id="val-balance">$533.14</div>
             <div class="sub" id="sub-balance">virtual</div>
           </div>
           <div class="card">
@@ -81,8 +81,8 @@
           </div>
           <div class="card">
             <div class="label">All-time</div>
-            <div class="value green-text" id="val-total">+$105.45</div>
-            <div class="sub" id="sub-total">432 trades, win rate 75% (324W / 108L)</div>
+            <div class="value green-text" id="val-total">+$533.14</div>
+            <div class="sub" id="sub-total">1632 trades, win rate 74.6% (1218W / 414L)</div>
           </div>
         </div>
 
@@ -141,7 +141,7 @@
         <div class="bt-hero">
           <h2 style="margin:0 0 8px;font-size:18px">Exit-sim backtest</h2>
           <p class="dim" style="margin:0;font-size:13px;max-width:640px">
-            Exit policy simulation on 432 historical entries from trade_history.jsonl.
+            Exit policy simulation on 1632 historical entries from trade journal.
             Comparison: actual vs new rules.
           </p>
         </div>
@@ -156,7 +156,7 @@
           <p class="dim" style="font-size:13px;margin:0 0 14px">How many signals would pass filters on historical data</p>
           <div class="bt-gate-stats">
             <div><span class="dim">Total signals</span><div class="bt-gate-num">1,247</div></div>
-            <div><span class="dim">Passed EV gate</span><div class="bt-gate-num green-text">432</div></div>
+            <div><span class="dim">Passed EV gate</span><div class="bt-gate-num green-text">1632</div></div>
             <div><span class="dim">Pass rate</span><div class="bt-gate-num">34.6%</div></div>
             <div><span class="dim">Strict replay</span><div class="bt-gate-num">~17%</div></div>
           </div>
@@ -264,7 +264,7 @@
       <div class="tab-panel" id="tab-trades">
         <div class="panel">
           <h3>Trade history</h3>
-          <p class="dim" style="font-size:12px;margin:0 0 12px">432 closed trades · paper + live mix · win rate 75% (324W / 108L)</p>
+          <p class="dim" style="font-size:12px;margin:0 0 12px">1632 closed trades · paper mix · win rate 74.6% (1218W / 414L)</p>
           <table>
             <thead>
               <tr>
@@ -277,7 +277,7 @@
         </div>
 
         <div class="cards">
-          <div class="card"><div class="label">Total PnL</div><div class="value green-text">+$105.45</div></div>
+          <div class="card"><div class="label">Total PnL</div><div class="value green-text">+$533.14</div></div>
           <div class="card"><div class="label">Win Rate</div><div class="value">75%</div></div>
           <div class="card"><div class="label">Best exit</div><div class="value green-text">take_profit</div><div class="sub">+$251 · 234 trades</div></div>
         </div>
