@@ -12,6 +12,15 @@ A complete product ready to launch as your own SaaS: branded website, trader das
 | **Product UI** | [/helix/](https://zirvey.github.io/Scalping-Bot-SaaS/helix/) |
 | **Bot demo** | [/demo/](https://zirvey.github.io/Scalping-Bot-SaaS/demo/) — sidebar trader cabinet (dashboard, trades, backtest, console) |
 
+## Product screenshots
+
+| | |
+|:---:|:---:|
+| **Landing & live stats** | **Trader dashboard** |
+| [![Helix Trade landing](assets/screenshots/01-helix-landing.png)](https://zirvey.github.io/Scalping-Bot-SaaS/helix/) | [![Trader dashboard](assets/screenshots/02-dashboard.png)](https://zirvey.github.io/Scalping-Bot-SaaS/demo/) |
+| **Backtest & performance** | **Pricing & subscriptions** |
+| [![Backtest analytics](assets/screenshots/03-backtest.png)](https://zirvey.github.io/Scalping-Bot-SaaS/demo/) | [![Pricing page](assets/screenshots/04-pricing.png)](https://zirvey.github.io/Scalping-Bot-SaaS/helix/#pricing) |
+
 ## Track record
 
 | Metric | Value |
